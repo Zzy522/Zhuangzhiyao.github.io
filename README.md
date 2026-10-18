@@ -102,11 +102,11 @@
 
 ## 学术成果
 
-- **MolGlueDB**：[分子胶在线数据库](https://www.molgluedb.com/)，第一作者，发表于 *Nucleic Acids Research*。
+-  *Nucleic Acids Research* 第一作者 - **MolGlueDB**：[分子胶在线数据库](https://www.molgluedb.com/)。
 - **MG2Act**：[分子胶活性预测模型](https://doi.org/10.64898/2026.08.08.739980v1)，第一作者，发表于 bioRxiv。
-- **CK1α 分子胶降解剂**：[基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价](https://www.cpa.org.cn/index.php?cid=74102&do=info)，第一作者，发表于《中国海洋药物》。
-- **AR-PROTAC**：[Discovery of an Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide CRBN-Binding Motif for Transdermal Treatment of Androgenetic Alopecia](https://doi.org/10.1021/acs.jmedchem.5c03843)，参与分子设计与化学合成，发表于 *Journal of Medicinal Chemistry*；共同作者（**Zhiyao Zhuang**）。
-- **DLK 综述**：[Deciphering the multifunctional role of dual leucine zipper kinase (DLK) and its therapeutic potential in disease](https://doi.org/10.1016/j.ejmech.2023.115404)。*European Journal of Medicinal Chemistry*, 2023, 255: 115404。Bu H, Li Z, Lu Y, **Zhuang Z**, Zhen Y, Zhang L。
+- 《中国海洋药物》第一作者 - **CK1α 分子胶降解剂**：[基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价](https://www.cpa.org.cn/index.php?cid=74102&do=info)。
+-  *Journal of Medicinal Chemistry* - **AR-PROTAC**：[Discovery of an Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide CRBN-Binding Motif for Transdermal Treatment of Androgenetic Alopecia](https://doi.org/10.1021/acs.jmedchem.5c03843)，参与分子设计与化学合成。
+- *European Journal of Medicinal Chemistry* - **DLK 综述**：[Deciphering the multifunctional role of dual leucine zipper kinase (DLK) and its therapeutic potential in disease](https://doi.org/10.1016/j.ejmech.2023.115404)。
 
 ## 竞赛与奖项
 
