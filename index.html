@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="庄智尧的学术主页：AI4S、AIDD、分子胶与科研智能体。">
+  <meta name="theme-color" content="#0b1220">
+  <meta property="og:title" content="庄智尧 | AI4S · AIDD · 科研智能体">
+  <meta property="og:description" content="AI for Science、AI-driven drug discovery 与科研智能体交叉研究。">
+  <meta property="og:image" content="https://zzy522.github.io/Zhuangzhiyao.github.io/assets/avatar.jpg">
+  <title>庄智尧 | AI4S · AIDD · 科研智能体</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --bg-2: #111b2d;
+      --panel: rgba(17, 29, 48, .78);
+      --panel-strong: #14233a;
+      --line: rgba(157, 183, 211, .16);
+      --line-strong: rgba(110, 226, 199, .38);
+      --text: #ecf3fa;
+      --muted: #9cb1c8;
+      --faint: #71859d;
+      --mint: #65e0c1;
+      --blue: #77a9ff;
+      --violet: #ae9bff;
+      --gold: #e8c87a;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .28);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #dfe7ef;
+      --bg-2: #cfd9e5;
+      --panel: rgba(242, 247, 251, .80);
+      --panel-strong: #edf3f8;
+      --line: rgba(30, 53, 77, .16);
+      --line-strong: rgba(10, 132, 111, .42);
+      --text: #17283b;
+      --muted: #536b83;
+      --faint: #6e8397;
+      --mint: #087f70;
+      --blue: #2f68c7;
+      --violet: #6650be;
+      --gold: #9b6e00;
+      --shadow: 0 24px 70px rgba(35, 60, 85, .18);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(101, 224, 193, .13), transparent 26rem),
+        radial-gradient(circle at 92% 14%, rgba(119, 169, 255, .14), transparent 29rem),
+        linear-gradient(135deg, var(--bg), var(--bg-2));
+      background-attachment: fixed;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .36;
+      background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: linear-gradient(to bottom, black, transparent 86%);
+      z-index: -1;
+    }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--mint); outline-offset: 4px; }
+    .skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 20; padding: .7rem 1rem; border-radius: 10px; background: var(--mint); color: #07211d; font-weight: 800; transition: top .2s; }
+    .skip-link:focus { top: 1rem; }
+    .shell { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; font-weight: 850; letter-spacing: .02em; }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 11px; color: var(--mint); background: rgba(101, 224, 193, .08); font-size: .76rem; }
+    .brand span { font-size: .92rem; }
+    nav { display: flex; align-items: center; gap: .28rem; }
+    nav a { padding: .45rem .68rem; color: var(--muted); text-decoration: none; font-size: .86rem; border-radius: 9px; transition: background .2s, color .2s; }
+    nav a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+    .controls { display: flex; gap: .5rem; }
+    .icon-btn, .lang-btn { min-width: 42px; height: 40px; padding: 0 .7rem; border: 1px solid var(--line); border-radius: 11px; color: var(--text); background: rgba(255,255,255,.04); cursor: pointer; font: inherit; font-size: .78rem; font-weight: 750; transition: border .2s, background .2s, transform .2s; }
+    .icon-btn:hover, .lang-btn:hover { border-color: var(--line-strong); background: rgba(101,224,193,.08); transform: translateY(-1px); }
+    .lang-btn[aria-pressed="true"] { color: var(--mint); border-color: var(--line-strong); }
+
+    main { padding: 4.2rem 0 3rem; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); gap: 2.5rem; align-items: end; padding: 2rem 0 2.6rem; }
+    .eyebrow { margin: 0 0 1rem; color: var(--mint); font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(3rem, 7vw, 6.7rem); line-height: .96; letter-spacing: -.07em; }
+    .hero-name { display: block; }
+    .hero-name-en { display: block; margin-top: .75rem; color: var(--muted); font-size: clamp(1.1rem, 2.1vw, 1.55rem); font-weight: 600; letter-spacing: -.02em; }
+    .hero-subtitle { margin: 1.6rem 0 0; max-width: 680px; color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.65rem; }
+    .button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: .45rem; padding: .65rem 1rem; border: 1px solid var(--line); border-radius: 12px; color: var(--text); text-decoration: none; font-size: .9rem; font-weight: 750; background: rgba(255,255,255,.045); transition: transform .2s, border .2s, background .2s; }
+    .button:hover { transform: translateY(-2px); border-color: var(--line-strong); background: rgba(101,224,193,.1); }
+    .button.primary { color: #06201a; border-color: transparent; background: var(--mint); }
+    .hero-side { position: relative; padding: 1.35rem; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(24, 43, 69, .78), rgba(14, 27, 45, .62)); box-shadow: var(--shadow); overflow: hidden; }
+    html[data-theme="light"] .hero-side { background: linear-gradient(145deg, rgba(255,255,255,.66), rgba(227,236,244,.62)); }
+    .hero-side::after { content: ""; position: absolute; width: 160px; height: 160px; top: -70px; right: -55px; border: 1px solid rgba(101,224,193,.25); border-radius: 50%; box-shadow: 0 0 0 24px rgba(101,224,193,.04), 0 0 0 48px rgba(101,224,193,.025); }
+    .profile-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.35rem; }
+    .avatar { width: 84px; height: 84px; object-fit: cover; border-radius: 50%; border: 2px solid var(--mint); box-shadow: 0 0 0 7px rgba(101,224,193,.08); }
+    .profile-meta h2 { margin: 0; font-size: 1.15rem; }
+    .profile-meta p { margin: .22rem 0 0; color: var(--muted); font-size: .85rem; }
+    .status { display: inline-flex; align-items: center; gap: .4rem; margin-top: .6rem; color: var(--mint); font-size: .76rem; font-weight: 750; }
+    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 4px rgba(101,224,193,.12); }
+    .focus-title { margin: 0 0 .75rem; font-size: .78rem; color: var(--faint); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .focus-stack { display: grid; gap: .62rem; }
+    .focus-line { display: flex; align-items: center; gap: .6rem; padding: .72rem .8rem; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.035); font-size: .9rem; }
+    .focus-line b { color: var(--mint); font-size: .76rem; letter-spacing: .1em; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin: .2rem 0 4.8rem; }
+    .stat { padding: 1.1rem 1rem; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.025); }
+    .stat strong { display: block; color: var(--text); font-size: clamp(1.35rem, 2.5vw, 2rem); line-height: 1.15; letter-spacing: -.04em; }
+    .stat span { display: block; margin-top: .35rem; color: var(--muted); font-size: .78rem; }
+
+    section { scroll-margin-top: 96px; margin: 0 0 5.4rem; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.55rem; }
+    .section-kicker { margin: 0 0 .25rem; color: var(--mint); font-size: .74rem; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
+    h2.section-title { margin: 0; font-size: clamp(1.85rem, 3.6vw, 3.15rem); letter-spacing: -.05em; line-height: 1.08; }
+    .section-note { max-width: 330px; margin: 0; color: var(--muted); font-size: .88rem; text-align: right; }
+    .focus-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .9rem; }
+    .focus-card { min-height: 180px; padding: 1.25rem; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); transition: transform .25s, border .25s; }
+    .focus-card:hover, .project-card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+    .focus-number { color: var(--faint); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; }
+    .focus-card h3 { margin: 1.25rem 0 .45rem; font-size: 1.04rem; }
+    .focus-card p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .timeline { position: relative; display: grid; gap: 1rem; }
+    .timeline::before { content: ""; position: absolute; top: 12px; bottom: 12px; left: 109px; width: 1px; background: linear-gradient(var(--mint), var(--line), transparent); }
+    .timeline-item { position: relative; display: grid; grid-template-columns: 90px 1fr; gap: 2.1rem; }
+    .timeline-year { padding-top: 1.1rem; color: var(--mint); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .76rem; text-align: right; }
+    .timeline-card { position: relative; padding: 1.1rem 1.25rem 1.15rem 1.45rem; border: 1px solid var(--line); border-radius: 15px; background: var(--panel); }
+    .timeline-card::before { content: ""; position: absolute; left: -2.15rem; top: 1.35rem; width: 9px; height: 9px; border: 3px solid var(--mint); border-radius: 50%; background: var(--bg); }
+    .timeline-card h3 { margin: 0; font-size: 1rem; }
+    .timeline-card p { margin: .3rem 0 0; color: var(--muted); font-size: .88rem; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: .42rem; margin-top: .85rem; }
+    .tag { display: inline-flex; align-items: center; padding: .3rem .56rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: .72rem; }
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .project-card { display: flex; flex-direction: column; min-height: 310px; padding: 1.3rem; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, var(--panel), rgba(12, 22, 38, .44)); transition: transform .25s, border .25s; }
+    html[data-theme="light"] .project-card { background: linear-gradient(145deg, var(--panel), rgba(224,234,242,.48)); }
+    .project-top { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+    .project-index { color: var(--mint); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .74rem; }
+    .project-status { color: var(--gold); font-size: .72rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    .project-card h3 { margin: 1.05rem 0 .45rem; font-size: 1.2rem; letter-spacing: -.025em; }
+    .project-lede { margin: 0; color: var(--muted); font-size: .88rem; }
+    .project-card ul { display: grid; gap: .48rem; margin: 1rem 0 0; padding-left: 1.1rem; color: var(--muted); font-size: .85rem; }
+    .project-card li::marker { color: var(--mint); }
+    .project-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem; margin-top: auto; padding-top: 1.2rem; }
+    .project-link { color: var(--mint); font-size: .82rem; font-weight: 800; text-decoration: none; }
+    .project-link:hover { text-decoration: underline; }
+    .pub-list { display: grid; gap: .8rem; counter-reset: publication; }
+    .pub { display: grid; grid-template-columns: 40px 1fr auto; gap: 1rem; align-items: start; padding: 1rem 1.1rem; border-bottom: 1px solid var(--line); }
+    .pub::before { counter-increment: publication; content: counter(publication, decimal-leading-zero); color: var(--mint); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; padding-top: .3rem; }
+    .pub h3 { margin: 0; font-size: .96rem; line-height: 1.45; }
+    .pub p { margin: .32rem 0 0; color: var(--muted); font-size: .82rem; }
+    .pub-badge { padding: .32rem .55rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: .7rem; white-space: nowrap; }
+    .awards { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    .award { display: flex; gap: .85rem; align-items: start; padding: 1rem; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+    .award-year { min-width: 42px; color: var(--gold); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; }
+    .award h3 { margin: 0; font-size: .88rem; line-height: 1.45; }
+    .award p { margin: .25rem 0 0; color: var(--muted); font-size: .77rem; }
+    .contact { display: grid; grid-template-columns: 1.2fr .8fr; gap: 1.5rem; align-items: stretch; padding: 1.5rem; border: 1px solid var(--line-strong); border-radius: var(--radius); background: linear-gradient(130deg, rgba(101,224,193,.1), rgba(119,169,255,.08)); }
+    .contact h2 { max-width: 630px; margin: 0; font-size: clamp(1.65rem, 3vw, 2.6rem); letter-spacing: -.05em; line-height: 1.1; }
+    .contact p { max-width: 620px; margin: .8rem 0 0; color: var(--muted); }
+    .contact-links { display: grid; align-content: center; gap: .65rem; }
+    .contact-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .7rem .85rem; border: 1px solid var(--line); border-radius: 11px; color: var(--muted); text-decoration: none; font-size: .84rem; background: rgba(255,255,255,.035); }
+    .contact-link span:last-child { color: var(--mint); font-size: .75rem; }
+    footer { padding: 1.5rem 0 2.8rem; color: var(--faint); font-size: .76rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; gap: 1.7rem; }
+      .hero-side { max-width: 680px; }
+      .focus-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 28px, var(--max)); }
+      .topbar-inner { min-height: 64px; }
+      nav { order: 3; width: 100%; overflow-x: auto; padding-bottom: .55rem; }
+      nav a { white-space: nowrap; padding-inline: .55rem; }
+      .topbar-inner { flex-wrap: wrap; padding: .55rem 0 0; }
+      .controls { margin-left: auto; }
+      main { padding-top: 2.6rem; }
+      h1 { font-size: clamp(3rem, 16vw, 5.2rem); }
+      .stats { grid-template-columns: repeat(2, 1fr); margin-bottom: 3.8rem; }
+      .section-head { display: block; }
+      .section-note { margin-top: .7rem; text-align: left; }
+      .projects, .awards, .contact { grid-template-columns: 1fr; }
+      .project-card { min-height: 0; }
+      .pub { grid-template-columns: 32px 1fr; }
+      .pub-badge { grid-column: 2; justify-self: start; }
+      .timeline::before { left: 77px; }
+      .timeline-item { grid-template-columns: 62px 1fr; gap: 1.5rem; }
+      .timeline-card::before { left: -1.56rem; }
+      .footer-inner { display: block; }
+      .footer-inner span + span { display: block; margin-top: .35rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+    @media print {
+      body { color: #17283b; background: #fff; }
+      body::before, .topbar, .hero-actions, .controls { display: none; }
+      .shell { width: 100%; }
+      main { padding-top: 0; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-side, .focus-card, .project-card, .timeline-card, .award, .contact { box-shadow: none; background: #fff; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-zh="跳到主要内容" data-en="Skip to main content">跳到主要内容</a>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="Back to top"><span class="brand-mark">ZZ</span><span>Zhuang Zhiyao</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#research" data-zh="研究方向" data-en="Research">研究方向</a>
+        <a href="#trajectory" data-zh="经历" data-en="Trajectory">经历</a>
+        <a href="#projects" data-zh="项目" data-en="Projects">项目</a>
+        <a href="#publications" data-zh="论文" data-en="Publications">论文</a>
+        <a href="#awards" data-zh="奖项" data-en="Awards">奖项</a>
+        <a href="#contact" data-zh="联系" data-en="Contact">联系</a>
+      </nav>
+      <div class="controls">
+        <button class="lang-btn" id="langToggle" type="button" aria-pressed="false" aria-label="Switch language">EN</button>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">◐</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="shell">
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow" data-zh="学术主页 · 研究与构建" data-en="Academic profile · Research & building">学术主页 · 研究与构建</p>
+        <h1 id="hero-title"><span class="hero-name" data-zh="庄智尧" data-en="Zhuang Zhiyao">庄智尧</span><span class="hero-name-en" data-zh="AI4S · AIDD · 科研智能体" data-en="AI for Science · AI-driven Drug Discovery · Scientific Agents">AI4S · AIDD · 科研智能体</span></h1>
+        <p class="hero-subtitle" data-zh="具备 AI4S 与药物化学交叉背景，专注于分子胶与 PROTAC 降解剂、药物化学文献信息抽取、分子性质预测和科研智能体。能够独立完成从数据构建、模型训练与评测，到 Agent 工作流开发、工具调用和系统部署的完整流程。" data-en="Interdisciplinary researcher working at the intersection of AI for Science, AI-driven drug discovery, and medicinal chemistry. My work focuses on molecular glue and PROTAC degraders, literature-scale structure–activity extraction, molecular property prediction, and scientific-agent workflows—from data curation and model evaluation to tool calling and deployment.">具备 AI4S 与药物化学交叉背景，专注于分子胶与 PROTAC 降解剂、药物化学文献信息抽取、分子性质预测和科研智能体。能够独立完成从数据构建、模型训练与评测，到 Agent 工作流开发、工具调用和系统部署的完整流程。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://github.com/Zzy522" target="_blank" rel="noreferrer" data-zh="访问 GitHub ↗" data-en="Visit GitHub ↗">访问 GitHub ↗</a>
+          <a class="button" href="https://www.molgluedb.com/" target="_blank" rel="noreferrer" data-zh="探索 MolGlueDB ↗" data-en="Explore MolGlueDB ↗">探索 MolGlueDB ↗</a>
+          <a class="button" href="mailto:944809681@qq.com" data-zh="联系我" data-en="Get in touch">联系我</a>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="Profile summary">
+        <div class="profile-row">
+          <img class="avatar" src="assets/avatar.jpg" alt="庄智尧个人照片" loading="lazy" onerror="this.style.display='none'">
+          <div class="profile-meta">
+            <h2 data-zh="中国海洋大学 · 药物化学硕士" data-en="Ocean University of China · M.S. in Medicinal Chemistry">中国海洋大学 · 药物化学硕士</h2>
+            <p data-zh="AIDD 方向 · 2024—2027" data-en="AIDD track · 2024—2027">AIDD 方向 · 2024—2027</p>
+            <span class="status" data-zh="开放科研合作与交流" data-en="Open to research collaboration">开放科研合作与交流</span>
+          </div>
+        </div>
+        <p class="focus-title" data-zh="研究主线" data-en="Research threads">研究主线</p>
+        <div class="focus-stack">
+          <div class="focus-line"><b>01</b><span data-zh="分子胶 · PROTAC · 靶向蛋白降解" data-en="Molecular glues · PROTACs · Targeted protein degradation">分子胶 · PROTAC · 靶向蛋白降解</span></div>
+          <div class="focus-line"><b>02</b><span data-zh="结构—活性文献挖掘与药化知识库" data-en="Structure–activity mining and medchem knowledge bases">结构—活性文献挖掘与药化知识库</span></div>
+          <div class="focus-line"><b>03</b><span data-zh="科研智能体 · Agent workflow · Benchmark" data-en="Scientific agents · Agent workflows · Benchmarks">科研智能体 · Agent workflow · Benchmark</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="stats" aria-label="Selected metrics">
+      <div class="stat"><strong>NAR</strong><span data-zh="共同第一作者论文" data-en="Joint first-author paper">共同第一作者论文</span></div>
+      <div class="stat"><strong>13.5k+</strong><span data-zh="Agent 评测样本" data-en="Agent evaluation samples">Agent 评测样本</span></div>
+      <div class="stat"><strong>22k+</strong><span data-zh="MolGlueDB 累计访问" data-en="MolGlueDB visits">MolGlueDB 累计访问</span></div>
+      <div class="stat"><strong>6×</strong><span data-zh="核心提取效率提升" data-en="Faster core extraction">核心提取效率提升</span></div>
+    </div>
+
+    <section id="research" aria-labelledby="research-title">
+      <div class="section-head"><div><p class="section-kicker">01 / Research</p><h2 id="research-title" class="section-title" data-zh="研究方向" data-en="Research focus">研究方向</h2></div><p class="section-note" data-zh="围绕药物化学问题，把数据、模型与智能体工作流连成可验证的研究链路。" data-en="Connecting data, models, and agentic workflows into verifiable medicinal-chemistry research loops.">围绕药物化学问题，把数据、模型与智能体工作流连成可验证的研究链路。</p></div>
+      <div class="focus-grid">
+        <article class="focus-card"><span class="focus-number">A / 01</span><h3 data-zh="AI4S & AIDD" data-en="AI4S & AIDD">AI4S & AIDD</h3><p data-zh="分子胶降解剂、PROTAC、分子性质预测与候选分子筛选。" data-en="Molecular glue degraders, PROTACs, molecular property prediction, and virtual screening.">分子胶降解剂、PROTAC、分子性质预测与候选分子筛选。</p><div class="tag-row"><span class="tag">Molecular Glue</span><span class="tag">PROTAC</span></div></article>
+        <article class="focus-card"><span class="focus-number">A / 02</span><h3 data-zh="科研智能体" data-en="Scientific agents">科研智能体</h3><p data-zh="MedChem Agent、多智能体协同、LangGraph、Agent Skills 与 Tool Calling。" data-en="MedChem agents, multi-agent systems, LangGraph, Agent Skills, and tool calling.">MedChem Agent、多智能体协同、LangGraph、Agent Skills 与 Tool Calling。</p><div class="tag-row"><span class="tag">LangGraph</span><span class="tag">Benchmark</span></div></article>
+        <article class="focus-card"><span class="focus-number">A / 03</span><h3 data-zh="数据与模型" data-en="Data & modeling">数据与模型</h3><p data-zh="Python、PyTorch、RDKit、OCR、结构标准化、模型训练与评测。" data-en="Python, PyTorch, RDKit, OCR, structure standardization, training, and evaluation.">Python、PyTorch、RDKit、OCR、结构标准化、模型训练与评测。</p><div class="tag-row"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">RDKit</span></div></article>
+        <article class="focus-card"><span class="focus-number">A / 04</span><h3 data-zh="系统开发" data-en="Systems development">系统开发</h3><p data-zh="Vue 3、Flask、D3.js、查询 API、数据库构建与在线部署。" data-en="Vue 3, Flask, D3.js, query APIs, database construction, and deployment.">Vue 3、Flask、D3.js、查询 API、数据库构建与在线部署。</p><div class="tag-row"><span class="tag">Vue 3</span><span class="tag">Flask</span><span class="tag">D3.js</span></div></article>
+      </div>
+    </section>
+
+    <section id="trajectory" aria-labelledby="trajectory-title">
+      <div class="section-head"><div><p class="section-kicker">02 / Trajectory</p><h2 id="trajectory-title" class="section-title" data-zh="教育与经历" data-en="Education & experience">教育与经历</h2></div><p class="section-note" data-zh="从药物化学训练出发，持续把研究方法转化为可运行的系统。" data-en="From medicinal-chemistry training to reproducible, deployable research systems.">从药物化学训练出发，持续把研究方法转化为可运行的系统。</p></div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-year">2024—27</div><div class="timeline-card"><h3 data-zh="中国海洋大学 · 药物化学硕士（AIDD）" data-en="Ocean University of China · M.S. in Medicinal Chemistry (AIDD)">中国海洋大学 · 药物化学硕士（AIDD）</h3><p data-zh="导师：秦冲 · 预计 2027 年毕业" data-en="Advisor: Qin Chong · Expected graduation in 2027">导师：秦冲 · 预计 2027 年毕业</p><div class="tag-row"><span class="tag" data-zh="中共党员" data-en="Communist Party member">中共党员</span><span class="tag" data-zh="药物化学" data-en="Medicinal chemistry">药物化学</span></div></div></div>
+        <div class="timeline-item"><div class="timeline-year">2019—23</div><div class="timeline-card"><h3 data-zh="西南交通大学 · 制药工程" data-en="Southwest Jiaotong University · B.Eng. in Pharmaceutical Engineering">西南交通大学 · 制药工程</h3><p data-zh="导师：张岚" data-en="Advisor: Zhang Lan">导师：张岚</p><div class="tag-row"><span class="tag" data-zh="制药工程" data-en="Pharmaceutical engineering">制药工程</span><span class="tag" data-zh="跨学科系统工程" data-en="Interdisciplinary systems">跨学科系统工程</span></div></div></div>
+        <div class="timeline-item"><div class="timeline-year">2026—</div><div class="timeline-card"><h3 data-zh="上海深度势能科技有限公司 · 科研 Agent 产品运营实习生" data-en="Shanghai Deep Potential Technology · Scientific Agent product intern">上海深度势能科技有限公司 · 科研 Agent 产品运营实习生</h3><p data-zh="开发精准文献推荐 Agent，参与 Agent Benchmark 构建与测评，推进科研 Agent 产品化。" data-en="Developed a precision literature-recommendation agent, contributed to Agent Benchmarking, and advanced scientific-agent productization.">开发精准文献推荐 Agent，参与 Agent Benchmark 构建与测评，推进科研 Agent 产品化。</p></div></div>
+        <div class="timeline-item"><div class="timeline-year">0 → 1</div><div class="timeline-card"><h3 data-zh="Lab Copilot 高校科研管理 Agent · 项目负责人" data-en="Lab Copilot research-management agent · Project lead">Lab Copilot 高校科研管理 Agent · 项目负责人</h3><p data-zh="从 0 到 1 完成产品开发，融合多模态数据采集、多 Agent 协同和私域知识库迭代。" data-en="Led the 0-to-1 development of a research-management agent combining multimodal data capture, multi-agent collaboration, and private knowledge-base iteration.">从 0 到 1 完成产品开发，融合多模态数据采集、多 Agent 协同和私域知识库迭代。</p><div class="tag-row"><span class="tag" data-zh="数据要素 × 山东省决赛路演优秀奖" data-en="Shandong Data Elements finalist · Excellence Award">数据要素 × 山东省决赛路演优秀奖</span></div></div></div>
+      </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="section-head"><div><p class="section-kicker">03 / Selected work</p><h2 id="projects-title" class="section-title" data-zh="精选科研项目" data-en="Selected research projects">精选科研项目</h2></div><p class="section-note" data-zh="以数据库、预测模型和智能体系统为支点，连接计算设计与药化实践。" data-en="Databases, predictive models, and agentic systems connecting computational design with medicinal-chemistry practice.">以数据库、预测模型和智能体系统为支点，连接计算设计与药化实践。</p></div>
+      <div class="projects">
+        <article class="project-card"><div class="project-top"><span class="project-index">01 / DATABASE</span><span class="project-status" data-zh="NAR · 共同第一作者" data-en="NAR · Joint first author">NAR · 共同第一作者</span></div><h3>MolGlueDB: Molecular Glue Database</h3><p class="project-lede" data-zh="面向分子胶研究的在线数据库与交互式知识资源。" data-en="An online database and interactive knowledge resource for molecular-glue research.">面向分子胶研究的在线数据库与交互式知识资源。</p><ul><li data-zh="完成数据收集、清洗、标准化和结构信息整理。" data-en="Curated, standardized, and organized molecular-glue data and structures.">完成数据收集、清洗、标准化和结构信息整理。</li><li data-zh="独立完成 Vue 3 + Flask 前后端、查询 API 与在线部署。" data-en="Built the Vue 3 + Flask stack, query APIs, and deployment independently.">独立完成 Vue 3 + Flask 前后端、查询 API 与在线部署。</li><li data-zh="D3.js 交互式可视化；累计访问 22,000+，下载 2,500+。" data-en="D3.js visualizations; 22,000+ visits and 2,500+ downloads to date.">D3.js 交互式可视化；累计访问 22,000+，下载 2,500+。</li></ul><div class="project-footer"><div class="tag-row"><span class="tag">Vue 3</span><span class="tag">Flask</span><span class="tag">D3.js</span></div><a class="project-link" href="https://www.molgluedb.com/" target="_blank" rel="noreferrer" data-zh="访问数据库 ↗" data-en="Open database ↗">访问数据库 ↗</a></div></article>
+        <article class="project-card"><div class="project-top"><span class="project-index">02 / AGENT SYSTEM</span><span class="project-status" data-zh="开发中 · 内部评测" data-en="In development · Internal evaluation">开发中 · 内部评测</span></div><h3>MedChem Agent & MolGlueDB v2</h3><p class="project-lede" data-zh="驱动药物化学知识库持续更新的多智能体系统。" data-en="A multi-agent system for continuous updating of a medicinal-chemistry knowledge base.">驱动药物化学知识库持续更新的多智能体系统。</p><ul><li data-zh="基于 LangGraph 搭建 11 个专业子 Agent，覆盖文献解析、OCR、结构识别、活性抽取和证据核验。" data-en="Built 11 specialist agents with LangGraph for parsing, OCR, structure recognition, activity extraction, and evidence verification.">基于 LangGraph 搭建 11 个专业子 Agent，覆盖文献解析、OCR、结构识别、活性抽取和证据核验。</li><li data-zh="打通“文献输入 → 结构化抽取 → 质量复核 → 数据入库 → 版本更新”。" data-en="Connected the full loop from literature input to structured extraction, review, ingestion, and versioning.">打通“文献输入 → 结构化抽取 → 质量复核 → 数据入库 → 版本更新”。</li><li data-zh="构建 13,500+ 条评测样本；核心提取效率较人工流程提升 6 倍以上。" data-en="Built 13,500+ evaluation samples; improved core extraction efficiency by more than 6× over the manual baseline.">构建 13,500+ 条评测样本；核心提取效率较人工流程提升 6 倍以上。</li></ul><div class="project-footer"><div class="tag-row"><span class="tag">LangGraph</span><span class="tag">OCR</span><span class="tag">Tool Calling</span></div><span class="project-link">Agent workflow</span></div></article>
+        <article class="project-card"><div class="project-top"><span class="project-index">03 / PREDICTION</span><span class="project-status">bioRxiv · Under review</span></div><h3>MG2Act: Molecular Glue Activity Prediction</h3><p class="project-lede" data-zh="融合分子结构表征与作用机制的分子胶连续活性预测模型。" data-en="A continuous activity-prediction model combining molecular representations with molecular-glue mechanisms.">融合分子结构表征与作用机制的分子胶连续活性预测模型。</p><ul><li data-zh="基于 RDKit 与 PyTorch 构建分子特征和深度学习模型。" data-en="Built molecular features and a deep-learning model with RDKit and PyTorch.">基于 RDKit 与 PyTorch 构建分子特征和深度学习模型。</li><li data-zh="在新靶点 Zero-shot 场景开展候选分子筛选。" data-en="Performed candidate screening in a new-target zero-shot setting.">在新靶点 Zero-shot 场景开展候选分子筛选。</li><li data-zh="获得 2 个 nM 级候选分子胶，初步结果中最高 Dmax 达到 95%。" data-en="Identified two nanomolar candidate molecular glues; maximum Dmax reached 95% in preliminary results.">获得 2 个 nM 级候选分子胶，初步结果中最高 Dmax 达到 95%。</li></ul><div class="project-footer"><div class="tag-row"><span class="tag">PyTorch</span><span class="tag">RDKit</span><span class="tag">Zero-shot</span></div><a class="project-link" href="https://doi.org/10.64898/2026.08.08.739980v1" target="_blank" rel="noreferrer">BioRxiv ↗</a></div></article>
+        <article class="project-card"><div class="project-top"><span class="project-index">04 / TARGET DISCOVERY</span><span class="project-status" data-zh="研究项目" data-en="Research project">研究项目</span></div><h3 data-zh="基于 MaSIF 的非降解分子胶开发与靶点筛选" data-en="MaSIF-based non-degrading molecular glue discovery">基于 MaSIF 的非降解分子胶开发与靶点筛选</h3><p class="project-lede" data-zh="使用蛋白表面指纹进行底物识别与候选靶点筛选。" data-en="Using protein-surface fingerprints for substrate recognition and candidate-target screening.">使用蛋白表面指纹进行底物识别与候选靶点筛选。</p><ul><li data-zh="基于 MaSIF 蛋白表面表征方法构建识别与筛选模型。" data-en="Built recognition and screening models with MaSIF protein-surface representations.">基于 MaSIF 蛋白表面表征方法构建识别与筛选模型。</li><li data-zh="获得 2 个候选靶蛋白，并开展三元组湿实验验证。" data-en="Identified two candidate target proteins and conducted ternary-complex wet-lab validation.">获得 2 个候选靶蛋白，并开展三元组湿实验验证。</li><li data-zh="进一步开展冷冻电镜实验，解析潜在结合模式。" data-en="Cryo-EM experiments are being pursued to resolve potential binding modes.">进一步开展冷冻电镜实验，解析潜在结合模式。</li></ul><div class="project-footer"><div class="tag-row"><span class="tag">MaSIF</span><span class="tag">Protein surface</span><span class="tag">Cryo-EM</span></div><span class="project-link">Target screening</span></div></article>
+        <article class="project-card"><div class="project-top"><span class="project-index">05 / MEDICINAL CHEMISTRY</span><span class="project-status" data-zh="已接收 · 待刊" data-en="Accepted · Forthcoming">已接收 · 待刊</span></div><h3 data-zh="CK1α 分子胶降解剂设计筛选" data-en="CK1α molecular glue degrader design">CK1α 分子胶降解剂设计筛选</h3><p class="project-lede" data-zh="将人工智能筛选与分子胶降解实验结合的药化研究。" data-en="A medicinal-chemistry study combining AI-assisted screening with molecular-glue degradation experiments.">将人工智能筛选与分子胶降解实验结合的药化研究。</p><ul><li data-zh="第一作者，论文已接收，预计 2027 年刊载于《中国海洋药物》。" data-en="First author; accepted and forthcoming in Chinese Journal of Marine Drugs in 2027.">第一作者，论文已接收，预计 2027 年刊载于《中国海洋药物》。 </li><li data-zh="参与 AR-PROTAC 的分子设计与化学合成，成果发表于 Journal of Medicinal Chemistry。" data-en="Contributed to the design and synthesis of an AR-PROTAC reported in the Journal of Medicinal Chemistry.">参与 AR-PROTAC 的分子设计与化学合成，成果发表于 Journal of Medicinal Chemistry。</li></ul><div class="project-footer"><div class="tag-row"><span class="tag">Molecular glue</span><span class="tag">AI screening</span></div><span class="project-link">Medicinal chemistry</span></div></article>
+      </div>
+    </section>
+
+    <section id="publications" aria-labelledby="publications-title">
+      <div class="section-head"><div><p class="section-kicker">04 / Publications</p><h2 id="publications-title" class="section-title" data-zh="论文与预印本" data-en="Publications & preprints">论文与预印本</h2></div><p class="section-note" data-zh="第一作者工作优先展示，状态以公开记录为准。" data-en="First-author work is listed first; publication status follows the public record.">第一作者工作优先展示，状态以公开记录为准。</p></div>
+      <div class="pub-list">
+        <article class="pub"><div><h3 data-zh="MolGlueDB：综合分子胶数据库" data-en="MolGlueDB: a comprehensive molecular glue database">MolGlueDB：综合分子胶数据库</h3><p data-zh="Nucleic Acids Research · 共同第一作者 · 2026 · 在线数据库" data-en="Nucleic Acids Research · Joint first author · 2026 · Online database">Nucleic Acids Research · 共同第一作者 · 2026 · 在线数据库</p></div><span class="pub-badge">NAR</span></article>
+        <article class="pub"><div><h3 data-zh="MG2Act：分子胶活性预测模型" data-en="MG2Act: molecular glue activity prediction">MG2Act：分子胶活性预测模型</h3><p data-zh="bioRxiv 预印本 · 第一作者 · Nature Communications 在审" data-en="bioRxiv preprint · First author · Manuscript under review at Nature Communications">bioRxiv 预印本 · 第一作者 · Nature Communications 在审</p></div><a class="pub-badge" href="https://doi.org/10.64898/2026.08.08.739980v1" target="_blank" rel="noreferrer">DOI ↗</a></article>
+        <article class="pub"><div><h3 data-zh="基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价" data-en="AI-assisted design, screening, and activity evaluation of CK1α molecular glue degraders">基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价</h3><p data-zh="《中国海洋药物》 · 第一作者 · 已接收，待刊" data-en="Chinese Journal of Marine Drugs · First author · Accepted, forthcoming">《中国海洋药物》 · 第一作者 · 已接收，待刊</p></div><a class="pub-badge" href="https://www.cpa.org.cn/index.php?cid=74102&do=info" target="_blank" rel="noreferrer">Link ↗</a></article>
+        <article class="pub"><div><h3>Discovery of an Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide CRBN-Binding Motif for Transdermal Treatment of Androgenetic Alopecia</h3><p>Journal of Medicinal Chemistry · Co-author · Contributed to molecular design and synthesis</p></div><a class="pub-badge" href="https://doi.org/10.1021/acs.jmedchem.5c03843" target="_blank" rel="noreferrer">DOI ↗</a></article>
+        <article class="pub"><div><h3>Deciphering the multifunctional role of dual leucine zipper kinase (DLK) and its therapeutic potential in disease</h3><p>European Journal of Medicinal Chemistry · 2023, 255: 115404 · Co-author</p></div><a class="pub-badge" href="https://doi.org/10.1016/j.ejmech.2023.115404" target="_blank" rel="noreferrer">DOI ↗</a></article>
+      </div>
+    </section>
+
+    <section id="awards" aria-labelledby="awards-title">
+      <div class="section-head"><div><p class="section-kicker">05 / Recognition</p><h2 id="awards-title" class="section-title" data-zh="竞赛与奖项" data-en="Honors & competitions">竞赛与奖项</h2></div><p class="section-note" data-zh="持续参与跨学科系统工程、企业管理与科研产品实践。" data-en="Recognition across interdisciplinary systems, business innovation, and research-product practice.">持续参与跨学科系统工程、企业管理与科研产品实践。</p></div>
+      <div class="awards">
+        <article class="award"><span class="award-year">2026</span><div><h3 data-zh="数据要素 × 山东省决赛路演优秀奖" data-en="Data Elements × Shandong final roadshow · Excellence Award">数据要素 × 山东省决赛路演优秀奖</h3><p data-zh="项目负责人" data-en="Project lead">项目负责人</p></div></article>
+        <article class="award"><span class="award-year">2025</span><div><h3 data-zh="中国研究生企业管理创新大赛 · 国家一等奖" data-en="China Graduate Business Innovation Competition · National First Prize">中国研究生企业管理创新大赛 · 国家一等奖</h3><p data-zh="队长 · 商业决策与运营管理类" data-en="Team captain · Business decision and operations">队长 · 商业决策与运营管理类</p></div></article>
+        <article class="award"><span class="award-year">2024</span><div><h3 data-zh="中国研究生企业管理创新大赛 · 国家二等奖" data-en="China Graduate Business Innovation Competition · National Second Prize">中国研究生企业管理创新大赛 · 国家二等奖</h3><p data-zh="队长 · 商业决策与运营管理类" data-en="Team captain · Business decision and operations">队长 · 商业决策与运营管理类</p></div></article>
+        <article class="award"><span class="award-year">2023</span><div><h3 data-zh="全国大学生工程训练综合能力竞赛 · 国家二等奖" data-en="National Undergraduate Engineering Training Competition · National Second Prize">全国大学生工程训练综合能力竞赛 · 国家二等奖</h3><p data-zh="队长 · 跨学科系统工程类" data-en="Team captain · Interdisciplinary systems engineering">队长 · 跨学科系统工程类</p></div></article>
+        <article class="award"><span class="award-year">2023</span><div><h3 data-zh="中国大学生化工设计大赛—天正设计杯 · 国家三等奖" data-en="China Chemical Engineering Design Competition · National Third Prize">中国大学生化工设计大赛—天正设计杯 · 国家三等奖</h3><p data-zh="队长" data-en="Team captain">队长</p></div></article>
+        <article class="award"><span class="award-year">2022—23</span><div><h3 data-zh="全国大学生工程训练综合能力竞赛 · 四川省一等奖" data-en="National Undergraduate Engineering Training Competition · Sichuan First Prize">全国大学生工程训练综合能力竞赛 · 四川省一等奖</h3><p data-zh="队长" data-en="Team captain">队长</p></div></article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div><p class="section-kicker">06 / Contact</p><h2 id="contact-title" data-zh="如果你也在探索 AI 与药物化学的交叉点，欢迎交流。" data-en="If you are exploring the intersection of AI and medicinal chemistry, let’s connect.">如果你也在探索 AI 与药物化学的交叉点，欢迎交流。</h2><p data-zh="研究合作、科研 Agent、AIDD 项目或数据库建设，都可以从一封邮件开始。" data-en="Research collaboration, scientific agents, AIDD projects, or database building—all can start with an email.">研究合作、科研 Agent、AIDD 项目或数据库建设，都可以从一封邮件开始。</p></div>
+      <div class="contact-links"><a class="contact-link" href="mailto:944809681@qq.com"><span>944809681@qq.com</span><span>Email ↗</span></a><a class="contact-link" href="https://github.com/Zzy522" target="_blank" rel="noreferrer"><span>github.com/Zzy522</span><span>GitHub ↗</span></a><a class="contact-link" href="https://www.molgluedb.com/" target="_blank" rel="noreferrer"><span>molgluedb.com</span><span>Research ↗</span></a><a class="contact-link" href="https://labcopai.com/" target="_blank" rel="noreferrer"><span>labcopai.com</span><span>Lab Copilot ↗</span></a></div>
+    </section>
+  </main>
+
+  <footer class="shell"><div class="footer-inner"><span>© <span id="year"></span> Zhuang Zhiyao</span><span data-zh="AI4S · AIDD · Scientific Agents" data-en="AI4S · AIDD · Scientific Agents">AI4S · AIDD · Scientific Agents</span></div></footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const langButton = document.getElementById('langToggle');
+      const themeButton = document.getElementById('themeToggle');
+      const nodes = [...document.querySelectorAll('[data-zh][data-en]')];
+      const savedLang = localStorage.getItem('zzy-language');
+      const savedTheme = localStorage.getItem('zzy-theme');
+      let lang = savedLang || (new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'zh');
+
+      function applyLanguage(next) {
+        lang = next;
+        root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        nodes.forEach((node) => { node.textContent = node.dataset[lang]; });
+        langButton.textContent = lang === 'zh' ? 'EN' : '中';
+        langButton.setAttribute('aria-pressed', String(lang === 'en'));
+        document.title = lang === 'zh' ? '庄智尧 | AI4S · AIDD · 科研智能体' : 'Zhuang Zhiyao | AI4S · AIDD · Scientific Agents';
+        localStorage.setItem('zzy-language', lang);
+      }
+
+      function applyTheme(next) {
+        root.dataset.theme = next;
+        themeButton.textContent = next === 'dark' ? '◐' : '◑';
+        themeButton.setAttribute('aria-label', next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        localStorage.setItem('zzy-theme', next);
+      }
+
+      langButton.addEventListener('click', () => applyLanguage(lang === 'zh' ? 'en' : 'zh'));
+      themeButton.addEventListener('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+      applyLanguage(lang);
+      applyTheme(savedTheme || 'dark');
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
