@@ -1,7 +1,7 @@
 # 庄智尧
 
 <p align="center">
-  <strong>AI4S · AIDD · 科研智能体</strong><br>
+  <strong>庄智尧 CV </strong><br>
   中国海洋大学 · 药物化学硕士（AIDD）· 2024 - 2027 
 </p>
 
