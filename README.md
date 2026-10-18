@@ -33,17 +33,7 @@
 | 本科阶段 | **西南交通大学**，制药工程，导师：张岚 |
 | 政治面貌 | 中共党员 |
 
-## 研究方向
-
-| 方向 | 关键词 |
-| --- | --- |
-| AI4S / AIDD | 分子胶降解剂、PROTAC、分子性质预测、候选分子筛选 |
-| 科研智能体 | MedChem Agent、多智能体协同、LangGraph、Agent Skills、Tool Calling、Agent Benchmark |
-| 数据与模型 | Python、PyTorch、RDKit、OCR、结构标准化、Agent开发与评测 |
-| 系统开发 | Vue3、Flask、D3.js、查询 API、数据库构建、在线部署 |
-| 证书与特长 | 英语六级、国家一级足球裁判员、腾讯云 AI 开发者认证 |
-
-## 精选科研项目
+## 科研项目
 
 ### MolGlueDB：分子胶在线数据库
 
@@ -96,6 +86,14 @@
 - 负责 0-1 完成 Agent 产品开发，融合多模态数据采集、多 Agent 协同和私域知识库迭代。
 - 面向高校实验室科研管理场景，构建可持续迭代的实验室 Agent。
 
+## 学术成果
+
+- **MolGlueDB**：[分子胶在线数据库](https://www.molgluedb.com/)，第一作者，发表于 *Nucleic Acids Research*。
+- **MG2Act**：[分子胶活性预测模型](https://doi.org/10.64898/2026.08.08.739980v1)，第一作者，发表于 bioRxiv。
+- [基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价](https://www.cpa.org.cn/index.php?cid=74102&do=info)，第一作者，发表于《中国海洋药物》。
+- [Discovery of an Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide CRBN-Binding Motif for Transdermal Treatment of Androgenetic Alopecia](https://doi.org/10.1021/acs.jmedchem.5c03843)，参与分子设计与化学合成，发表于 *Journal of Medicinal Chemistry*。
+- [Deciphering the multifunctional role of dual leucine zipper kinase (DLK) and its therapeutic potential in disease](https://doi.org/10.1016/j.ejmech.2023.115404)。*European Journal of Medicinal Chemistry*。
+
 ## 竞赛与奖项
 
 | 赛事 | 角色 | 奖项 | 年份 |
@@ -108,13 +106,16 @@
 | 中国大学生化工设计大赛—天正设计杯 | 队长 | 西南赛区二等奖 | 2023 |
 | 数据要素 × 山东省决赛路演 | 项目负责人 | 优秀奖 | 2026 |
 
-## 学术成果
 
-- **MolGlueDB**：[分子胶在线数据库](https://www.molgluedb.com/)，第一作者，发表于 *Nucleic Acids Research*。
-- **MG2Act**：[分子胶活性预测模型](https://doi.org/10.64898/2026.08.08.739980v1)，第一作者，发表于 bioRxiv。
-- **CK1α 分子胶降解剂**：[基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价](https://www.cpa.org.cn/index.php?cid=74102&do=info)，第一作者，发表于《中国海洋药物》。
-- **AR-PROTAC**：[Discovery of an Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide CRBN-Binding Motif for Transdermal Treatment of Androgenetic Alopecia](https://doi.org/10.1021/acs.jmedchem.5c03843)，参与分子设计与化学合成，发表于 *Journal of Medicinal Chemistry*；共同作者（**Zhiyao Zhuang**）。
-- **DLK 综述**：[Deciphering the multifunctional role of dual leucine zipper kinase (DLK) and its therapeutic potential in disease](https://doi.org/10.1016/j.ejmech.2023.115404)。*European Journal of Medicinal Chemistry*, 2023, 255: 115404。Bu H, Li Z, Lu Y, **Zhuang Z**, Zhen Y, Zhang L。
+## 研究方向
+
+| 方向 | 关键词 |
+| --- | --- |
+| AI4S / AIDD | 分子胶降解剂、PROTAC、分子性质预测、候选分子筛选 |
+| 科研智能体 | MedChem Agent、多智能体协同、LangGraph、Agent Skills、Tool Calling、Agent Benchmark |
+| 数据与模型 | Python、PyTorch、RDKit、OCR、结构标准化、Agent开发与评测 |
+| 系统开发 | Vue3、Flask、D3.js、查询 API、数据库构建、在线部署 |
+| 证书与特长 | 英语六级、国家一级足球裁判员、腾讯云 AI 开发者认证 |
 
 ---
 
