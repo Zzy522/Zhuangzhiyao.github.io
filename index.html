@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>庄智尧 | AI4S · AIDD · 科研智能体</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style>
+body { max-width: 980px; margin: 0 auto; padding: 40px 24px; color: #24292f; background: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", sans-serif; line-height: 1.7; }
+h1, h2, h3 { color: #16324f; line-height: 1.3; }
+h1 { font-size: 2.2rem; }
+h2 { margin-top: 2.2rem; border-bottom: 1px solid #d8dee4; padding-bottom: .4rem; }
+h3 { margin-top: 1.6rem; }
+a { color: #0969da; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; }
+th, td { border: 1px solid #d0d7de; padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: #f6f8fa; }
+blockquote { margin: 16px 0; padding: 8px 16px; border-left: 4px solid #1f6feb; background: #f6f8fa; }
+img { max-width: 100%; height: auto; }
+@media (max-width: 700px) { body { padding: 24px 16px; } table { display: block; overflow-x: auto; white-space: nowrap; } }
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">庄智尧 | AI4S · AIDD · 科研智能体</h1>
+</header>
+<h1 id="庄智尧">庄智尧</h1>
+<p align="center">
+<img src="assets/avatar.jpg" alt="庄智尧个人照片" width="160">
+</p>
+<p align="center">
+<strong>AI4S · AIDD · 科研智能体</strong><br> 中国海洋大学 ·
+药物化学硕士（AIDD）· 2024 - 2027
+</p>
+<p align="center">
+<a href="https://github.com/Zzy522">
+<img src="https://img.shields.io/badge/GitHub-Zzy522-181717?style=flat-square&logo=github" alt="GitHub">
+</a> <a href="https://www.molgluedb.com/">
+<img src="https://img.shields.io/badge/MolGlueDB-Online-0a7b83?style=flat-square" alt="MolGlueDB">
+</a>
+<img src="https://img.shields.io/badge/Research-AI4S%20%7C%20AIDD-1f6feb?style=flat-square" alt="Research">
+<img src="https://img.shields.io/badge/Focus-Molecular%20Glue%20%7C%20MedChem%20Agent-6f42c1?style=flat-square" alt="Focus">
+</p>
+<blockquote>
+<p>具备 AI4S 与药物化学交叉背景，专注于分子胶与 PROTAC
+降解剂、药物化学文献信息抽取、分子性质预测和科研智能体。能够独立完成从数据构建、模型训练与评测，到
+Agent 工作流开发、工具调用和系统部署的完整流程。</p>
+</blockquote>
+<h2 id="联系方式">联系方式</h2>
+<ul>
+<li><strong>邮箱</strong>：944809681@qq.com</li>
+<li><strong>电话</strong>：18686314912</li>
+<li><strong>GitHub</strong>：<a
+href="https://github.com/Zzy522/">github.com/Zzy522</a></li>
+<li><strong>研究主页</strong>：<a
+href="https://www.molgluedb.com/">MolGlueDB</a></li>
+</ul>
+<h2 id="教育背景">教育背景</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>时间</th>
+<th>经历</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>在读（预计 2027 年毕业）</td>
+<td><strong>中国海洋大学</strong>，药物化学硕士（AIDD），导师：秦冲</td>
+</tr>
+<tr class="even">
+<td>本科阶段</td>
+<td><strong>西南交通大学</strong>，制药工程，导师：张岚</td>
+</tr>
+<tr class="odd">
+<td>政治面貌</td>
+<td>中共党员</td>
+</tr>
+</tbody>
+</table>
+<h2 id="研究方向">研究方向</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方向</th>
+<th>关键词</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AI4S / AIDD</td>
+<td>分子胶降解剂、PROTAC、分子性质预测、候选分子筛选</td>
+</tr>
+<tr class="even">
+<td>科研智能体</td>
+<td>MedChem Agent、多智能体协同、LangGraph、Agent Skills、Tool
+Calling、Agent Benchmark</td>
+</tr>
+<tr class="odd">
+<td>数据与模型</td>
+<td>Python、PyTorch、RDKit、OCR、结构标准化、模型训练与评测</td>
+</tr>
+<tr class="even">
+<td>系统开发</td>
+<td>Vue3、Flask、D3.js、查询 API、数据库构建、在线部署</td>
+</tr>
+<tr class="odd">
+<td>AI 工具</td>
+<td>Cursor、Codex</td>
+</tr>
+<tr class="even">
+<td>证书与特长</td>
+<td>英语六级、国家一级足球裁判员、腾讯云 AI 开发者认证</td>
+</tr>
+</tbody>
+</table>
+<h2 id="精选科研项目">精选科研项目</h2>
+<h3 id="molgluedb分子胶在线数据库">MolGlueDB：分子胶在线数据库</h3>
+<p><a href="https://www.molgluedb.com/">访问 MolGlueDB</a> ·
+<strong>第一作者发表于 Nucleic Acids Research</strong></p>
+<ul>
+<li>完成分子胶数据收集、清洗、标准化和结构信息整理，构建面向药物化学研究的专用数据资源。</li>
+<li>采用 <strong>Vue3 + Flask</strong>
+架构独立完成前后端系统设计、数据库构建、查询 API 开发和在线部署。</li>
+<li>使用 <strong>D3.js</strong>
+实现化合物、靶点和活性数据的交互式可视化。</li>
+<li>平台上线后累计访问量超过 <strong>22,000 次</strong>，数据下载量超过
+<strong>2,500 次</strong>，总互动人次超过 <strong>10,000</strong>。</li>
+</ul>
+<h3 id="medchem-agent-molgluedb-v2智能体自主更新数据库">MedChem Agent
+&amp; MolGlueDB-v2：智能体自主更新数据库</h3>
+<ul>
+<li>面向药物化学文献中的“结构—活性”信息获取问题，构建由 MedChem Agent
+驱动的数据库自主更新系统。</li>
+<li>基于 <strong>LangGraph</strong> 搭建包含 11 个专业子 Agent
+的多智能体架构，覆盖文献解析、OCR
+降噪、化合物结构识别、活性信息抽取、证据核验、数据去重和数据库更新。</li>
+<li>打通“文献输入 → 结构化抽取 → 质量复核 → 数据入库 →
+版本更新”全流程，支持分子胶数据库持续自动化维护。</li>
+<li>将药物化学专家分析流程封装为可复用的 Agent Skills 与 Tools，实现
+Tool Calling 和多工具协同。</li>
+<li>构建包含 <strong>13,500+
+条样本</strong>的评测集，评估信息抽取准确率、工具调用准确率、响应延迟和
+Token 成本。</li>
+<li>通过工作流和提示词迭代，使核心信息提取效率较人工流程提升 <strong>6
+倍以上</strong>。</li>
+</ul>
+<h3 id="mg2act分子胶活性预测模型">MG2Act：分子胶活性预测模型</h3>
+<p><a href="https://doi.org/10.64898/2026.08.08.739980v1">BioRxiv
+预印本</a> · <strong>第一作者，Nature Communications Under
+Review</strong></p>
+<ul>
+<li>基于真实分子胶数据构建连续活性预测任务，融合分子结构表征与分子胶作用机制进行建模。</li>
+<li>使用 <strong>RDKit</strong> 完成分子特征构建，基于
+<strong>PyTorch</strong> 搭建深度学习预测模型。</li>
+<li>在新靶点 Zero-shot 场景下开展候选分子筛选，获得 <strong>2 个 nM
+级候选分子胶</strong>，其中最高 <strong>Dmax 达到 95%</strong>。</li>
+</ul>
+<h3
+id="基于蛋白表面指纹-masif-的非降解分子胶开发与靶点筛选">基于蛋白表面指纹
+MaSIF 的非降解分子胶开发与靶点筛选</h3>
+<ul>
+<li>基于 MaSIF
+蛋白表面表征方法，构建非降解分子胶的蛋白底物识别与靶点筛选模型。</li>
+<li>面向候选蛋白开展前瞻性筛选，获得 <strong>2
+个具有显著作用的候选靶点蛋白</strong>。</li>
+<li>已通过三元组湿实验验证分子胶、靶蛋白及相关作用关系，进一步开展冷冻电镜实验解析结合模式。</li>
+</ul>
+<h3 id="ck1α-分子胶降解剂设计筛选">CK1α 分子胶降解剂设计筛选</h3>
+<ul>
+<li>以第一作者在《中国海洋药物》发表《基于人工智能的 CK1α
+分子胶降解剂设计筛选及其活性评价》。</li>
+<li>参与 AR-PROTAC 的设计与化学合成，相关成果发表于 <strong>Journal of
+Medicinal Chemistry</strong>。</li>
+</ul>
+<h2 id="实习与产品经历">实习与产品经历</h2>
+<h3
+id="上海深度势能科技有限公司科研-agent-产品运营实习生开发-产品">上海深度势能科技有限公司｜科研
+Agent 产品运营实习生（开发 + 产品）</h3>
+<ul>
+<li>开发精准文献推荐 Agent，参与 Agent Benchmark 的构建与测评。</li>
+<li>负责将科研场景、数据资源和智能体工作流结合，推进科研 Agent
+产品化。</li>
+</ul>
+<h3 id="lab-copilot-高校科研管理-agent项目负责人">Lab Copilot
+高校科研管理 Agent｜项目负责人</h3>
+<p><a href="https://labcopai.com/">访问 Lab Copilot</a> ·
+<strong>数据要素 × 山东省决赛路演优秀奖</strong></p>
+<ul>
+<li>负责 0-1 完成 Agent 产品开发，融合多模态数据采集、多 Agent
+协同和私域知识库迭代。</li>
+<li>面向高校实验室科研管理场景，构建可持续迭代的实验室 Agent。</li>
+</ul>
+<h2 id="学术成果">学术成果</h2>
+<ul>
+<li><strong>MolGlueDB</strong>：<a
+href="https://www.molgluedb.com/">分子胶在线数据库</a>，第一作者，发表于
+<em>Nucleic Acids Research</em>。</li>
+<li><strong>MG2Act</strong>：<a
+href="https://doi.org/10.64898/2026.08.08.739980v1">分子胶活性预测模型</a>，第一作者，发表于
+bioRxiv。</li>
+<li><strong>CK1α 分子胶降解剂</strong>：<a
+href="https://www.cpa.org.cn/index.php?cid=74102&amp;do=info">基于人工智能的
+CK1α
+分子胶降解剂设计筛选及其活性评价</a>，第一作者，发表于《中国海洋药物》。</li>
+<li><strong>AR-PROTAC</strong>：<a
+href="https://doi.org/10.1021/acs.jmedchem.5c03843">Discovery of an
+Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide
+CRBN-Binding Motif for Transdermal Treatment of Androgenetic
+Alopecia</a>，参与分子设计与化学合成，发表于 <em>Journal of Medicinal
+Chemistry</em>；共同作者（<strong>Zhiyao Zhuang</strong>）。</li>
+<li><strong>DLK 综述</strong>：<a
+href="https://doi.org/10.1016/j.ejmech.2023.115404">Deciphering the
+multifunctional role of dual leucine zipper kinase (DLK) and its
+therapeutic potential in disease</a>。<em>European Journal of Medicinal
+Chemistry</em>, 2023, 255: 115404。Bu H, Li Z, Lu Y, <strong>Zhuang
+Z</strong>, Zhen Y, Zhang L。</li>
+</ul>
+<h2 id="竞赛与奖项">竞赛与奖项</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>赛事</th>
+<th>角色</th>
+<th>奖项</th>
+<th>年份</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>中国研究生企业管理创新大赛（商业决策与运营管理类）</td>
+<td>队长</td>
+<td><strong>国家一等奖</strong></td>
+<td><strong>2025</strong></td>
+</tr>
+<tr class="even">
+<td>中国研究生企业管理创新大赛（商业决策与运营管理类）</td>
+<td>队长</td>
+<td><strong>国家二等奖</strong></td>
+<td><strong>2024</strong></td>
+</tr>
+<tr class="odd">
+<td>全国大学生工程训练综合能力竞赛（跨学科系统工程类）</td>
+<td>队长</td>
+<td><strong>国家二等奖</strong></td>
+<td><strong>2023</strong></td>
+</tr>
+<tr class="even">
+<td>全国大学生工程训练综合能力竞赛</td>
+<td>队长</td>
+<td>四川省一等奖</td>
+<td>2022、2023</td>
+</tr>
+<tr class="odd">
+<td>中国大学生化工设计大赛—天正设计杯</td>
+<td>队长</td>
+<td>国家三等奖</td>
+<td>2023</td>
+</tr>
+<tr class="even">
+<td>中国大学生化工设计大赛—天正设计杯</td>
+<td>队长</td>
+<td>西南赛区二等奖</td>
+<td>2023</td>
+</tr>
+<tr class="odd">
+<td>数据要素 × 山东省决赛路演</td>
+<td>项目负责人</td>
+<td>优秀奖</td>
+<td>2026</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p align="center">
+<sub>AI4S · AIDD · Molecular Glue · MedChem Agent</sub>
+</p>
+</body>
+</html>
