@@ -409,7 +409,7 @@
     }
 
     .cell-body p {
-      margin: 0;
+      margin: 0.15rem 0 0;
       color: var(--c-text-secondary);
       font-size: 0.92rem;
     }
@@ -438,7 +438,6 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 0.5rem;
-      margin-block-end: 0.15rem;
     }
 
     .award-title {
@@ -803,7 +802,7 @@
           {
             id: 'exp-swjtu',
             period: '2020—2024',
-            title: { zh: '西南交通大学 · 制药工程学士', en: 'Southwest Jiaotong University · B.Eng. in Pharmaceutical Engineering' },
+            title: { zh: '西南交通大学 · 制药工程学士', en: 'Southwest Jiaotong University · B.Eng. in Pharmaceutical Engineering' }
           }
         ],
         credentials: [
@@ -820,31 +819,54 @@
       });
 
       /* ========================================================================
-         子组件 1: 响应式高分头像 (支持 srcset / sizes 密度协商，避免模糊与 CLS)
+         子组件 1: 响应式高分头像 (支持 srcset 像素密度协商 + 错误优雅回退，无硬编码断点)
          ======================================================================== */
       const ResponsivePortrait = memo(function ResponsivePortrait({ src1x, src2x, src3x, altText }) {
+        const [hasError, setHasError] = useState(false);
+
+        const handleImageError = useCallback(() => {
+          setHasError(true);
+        }, []);
+
         const srcSetString = useMemo(
           () => `${src1x} 1x, ${src2x} 2x, ${src3x} 3x`,
           [src1x, src2x, src3x]
         );
 
+        if (hasError) {
+          return h(
+            'div',
+            {
+              className: 'avatar-picture',
+              style: {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 700,
+                fontSize: '1.15rem',
+                color: 'var(--c-brand-primary)'
+              },
+              role: 'img',
+              'aria-label': altText
+            },
+            'ZZY'
+          );
+        }
+
         return h(
           'picture',
           { className: 'avatar-picture' },
-          h('source', {
-            srcSet: srcSetString,
-            sizes: '(max-width: 640px) 76px, 92px'
-          }),
+          h('source', { srcSet: srcSetString }),
           h('img', {
             className: 'avatar-img',
             src: src1x,
             srcSet: srcSetString,
-            sizes: '(max-width: 640px) 76px, 92px',
             alt: altText,
             width: 92,
             height: 92,
             loading: 'eager',
-            decoding: 'async'
+            decoding: 'async',
+            onError: handleImageError
           })
         );
       });
@@ -1019,7 +1041,7 @@
       };
 
       /* ========================================================================
-         子组件 4: 荣誉与奖项列表项 (突出 2026 研究生国家奖学金、小米奖学金、海大文体奖学金)
+         子组件 4: 荣誉与奖项列表项 (支持可选 badge 与可选 issuer 安全渲染)
          ======================================================================== */
       const AwardRow = memo(function AwardRow({ year, title, badge, issuer, highlight }) {
         return h(
@@ -1040,7 +1062,7 @@
                   ? h('span', { className: 'award-badge' }, badge)
                   : null
               ),
-              h('p', null, issuer)
+              issuer ? h('p', null, issuer) : null
             )
           )
         );
@@ -1050,7 +1072,7 @@
         year: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         badge: PropTypes.string,
-        issuer: PropTypes.string.isRequired,
+        issuer: PropTypes.string,
         highlight: PropTypes.bool.isRequired
       };
 
@@ -1287,7 +1309,7 @@
                 year: aw.year,
                 title: aw.title[lang],
                 badge: aw.badge ? aw.badge[lang] : undefined,
-                issuer: aw.issuer[lang],
+                issuer: aw.issuer ? aw.issuer[lang] : undefined,
                 highlight: aw.highlight
               })
             )
@@ -1313,7 +1335,7 @@
                       'div',
                       { className: 'cell-body' },
                       h('strong', { className: 'award-title' }, exp.title[lang]),
-                      h('p', null, exp.detail[lang])
+                      exp.detail ? h('p', null, exp.detail[lang]) : null
                     )
                   )
                 )
