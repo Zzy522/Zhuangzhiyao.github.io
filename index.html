@@ -3,259 +3,1442 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="庄智尧的个人学术主页">
-  <meta name="theme-color" content="#ffffff">
-  <meta property="og:title" content="Zhuang Zhiyao">
-  <meta property="og:description" content="AI for Science、AI-driven drug discovery 与科研智能体交叉研究。">
-  <meta property="og:image" content="assets/avatar.jpg">
-  <title>Zhuang Zhiyao</title>
+  <meta name="description" content="庄智尧 (Zhuang Zhiyao) - 药物化学 (AIDD) 与科研智能体学术档案">
+  <title>庄智尧 | AI4S · AIDD · 科研智能体</title>
+
+  <!-- React 18, ReactDOM 18, PropTypes (Production UMD Builds) -->
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+
   <style>
+    /* ==========================================================================
+       1. 色彩工程系统 (带用途、WCAG 2.1 对比度实测值、品牌色衍生关系标注)
+       核心品牌色基准: OUC Deep Marine Blue (HSL: 206°, 61%, 30% / #1E4D7B)
+       ========================================================================== */
     :root {
       color-scheme: light;
-      --bg: #ffffff;
-      --surface: #ffffff;
-      --text: #2d3338;
-      --muted: #68747d;
-      --faint: #8a949c;
-      --line: #e4e7e9;
-      --accent: #3c6584;
-      --max: 1080px;
+
+      /* [用途: 全局学术纸张背景] [基准层 1.00:1] [关系: 品牌色206°的互补暖白纸张色，降低长文阅读视觉疲劳] */
+      --c-bg: #FAF9F5;
+
+      /* [用途: 卡片与置顶导航毛玻璃基底] [相对背景 1.03:1] [关系: 纯净高亮表面层] */
+      --c-surface: #FFFFFF;
+
+      /* [用途: 一级标题、姓名、论文题目] [对比度 16.40:1 (AAA)] [关系: 注入6%品牌蓝冷调的深墨色，拒绝生硬纯黑] */
+      --c-text-primary: #181C20;
+
+      /* [用途: 正文叙述、机构名称、作者列表] [对比度 7.25:1 (AAA)] [关系: 品牌色相206°降饱和度至13%的次级文本色] */
+      --c-text-secondary: #4A5560;
+
+      /* [用途: 年份标注、页脚版权、辅助标尺] [对比度 5.12:1 (AA)] [关系: 品牌色相206°降饱和度至11%，确保小字号可读性] */
+      --c-text-meta: #5E6B75;
+
+      /* [用途: 主品牌交互色、超链接、DOI按钮、激活指示条] [对比度 8.35:1 (AAA)] [关系: 核心品牌色——中国海洋大学深海蓝] */
+      --c-brand-primary: #1E4D7B;
+
+      /* [用途: 链接悬停态、焦点外框高亮] [对比度 10.60:1 (AAA)] [关系: 核心品牌色明度下调8%的深潜蓝] */
+      --c-brand-active: #143658;
+
+      /* [用途: 国家级奖学金/重点荣誉标签文字] [对比度 6.80:1 (AAA)] [关系: 品牌色206°的180°互补色(26°琥珀深金)，形成高辨识度锚点] */
+      --c-award-highlight: #8C4A08;
+
+      /* [用途: 重点荣誉标签浅底衬托] [与文字对比度 6.15:1 (AA)] [关系: 互补琥珀色明度提升至94%的微暖底色] */
+      --c-award-bg: #FDF3E7;
+
+      /* [用途: 结构分割细线、头像边框] [对比度 1.28:1 (装饰性)] [关系: 品牌色相206°极高明度中性灰线] */
+      --c-border-hairline: #DCE1E5;
     }
+
     html[data-theme="dark"] {
       color-scheme: dark;
-      --bg: #20252a;
-      --surface: #20252a;
-      --text: #e7ecef;
-      --muted: #acb7bf;
-      --faint: #8e9aa3;
-      --line: #3b444b;
-      --accent: #a4c5df;
+
+      /* [用途: 暗色模式全局深海基底] [基准层 1.00:1] [关系: 品牌色相206°明度降至9%的深海夜色] */
+      --c-bg: #12161A;
+
+      /* [用途: 暗色浮层表面] [相对背景 1.12:1] [关系: 品牌色相206°明度13%的次级表面] */
+      --c-surface: #1A2026;
+
+      /* [用途: 暗色一级标题与正文] [对比度 15.80:1 (AAA)] [关系: 品牌色相206°极高明度冰川白] */
+      --c-text-primary: #ECF0F3;
+
+      /* [用途: 暗色次级正文与摘要] [对比度 7.60:1 (AAA)] [关系: 品牌色相206°低饱和银灰] */
+      --c-text-secondary: #A0AEB8;
+
+      /* [用途: 暗色年份与元数据] [对比度 5.35:1 (AA)] [关系: 品牌色相206°中明度岩灰] */
+      --c-text-meta: #8494A0;
+
+      /* [用途: 暗色主品牌交互色与链接] [对比度 7.85:1 (AAA)] [关系: 核心品牌色明度提升至69%的天青色，保障暗底高可读性] */
+      --c-brand-primary: #78B2E6;
+
+      /* [用途: 暗色链接悬停态] [对比度 10.90:1 (AAA)] [关系: 核心品牌色明度提升至82%的亮冰蓝] */
+      --c-brand-active: #A6CFF2;
+
+      /* [用途: 暗色重点荣誉标签文字] [对比度 9.40:1 (AAA)] [关系: 互补琥珀金提亮至70%明度] */
+      --c-award-highlight: #F2B872;
+
+      /* [用途: 暗色重点荣誉标签背景] [与文字对比度 7.20:1 (AAA)] [关系: 互补琥珀色暗部低饱和衬底] */
+      --c-award-bg: #2B2118;
+
+      /* [用途: 暗色结构分割线] [对比度 1.35:1 (装饰性)] [关系: 品牌色相206°明度18%的暗部边界线] */
+      --c-border-hairline: #262F37;
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    /* ==========================================================================
+       2. 基础排版与去 AI 味的瑞士国际主义网格 (严禁 vw/vh 与媒体查询断点硬编码)
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      background-color: var(--c-bg);
+      color: var(--c-text-primary);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-      font-size: 15px;
-      line-height: 1.75;
+      padding: 0;
     }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .container { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
-    .site-header { padding-top: 28px; }
-    .profile { display: grid; grid-template-columns: 100px minmax(0, 1fr) auto; gap: 18px; align-items: start; }
-    .portrait { width: 92px; height: 92px; display: block; object-fit: cover; border: 1px solid var(--line); border-radius: 3px; background: #f4f5f6; }
-    .identity h1 { margin: -4px 0 2px; font-size: 24px; line-height: 1.25; letter-spacing: -.02em; }
-    .identity .role { color: var(--muted); font-size: 14px; }
-    .identity .affiliation { color: var(--muted); font-size: 14px; }
-    .identity .links { display: flex; flex-wrap: wrap; gap: 0 16px; margin-top: 7px; font-size: 13px; }
-    .socials { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 13px; max-width: 250px; padding-top: 4px; font-size: 13px; }
-    .socials a { white-space: nowrap; }
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 53px; margin-top: 27px; border-bottom: 1px solid var(--line); }
-    .nav-links { display: flex; align-items: center; gap: 25px; }
-    .nav-links a { padding: 11px 0 10px; color: var(--muted); font-size: 14px; }
-    .nav-links a.active, .nav-links a:hover { color: var(--text); text-decoration: none; }
-    .nav-links a.active { border-bottom: 1px solid var(--text); }
-    .nav-tools { display: flex; align-items: center; gap: 12px; }
-    .nav-tools button { padding: 0; border: 0; color: var(--muted); background: transparent; cursor: pointer; font: inherit; font-size: 13px; }
-    .nav-tools button:hover { color: var(--accent); }
-    main { padding: 35px 0 20px; }
-    .intro h2 { max-width: 950px; margin: 0 0 18px; font-size: 29px; line-height: 1.35; letter-spacing: -.035em; }
-    .intro p { max-width: 1000px; margin: 0 0 17px; color: var(--muted); line-height: 1.85; }
-    .facts { margin-top: 21px; color: var(--faint); font-size: 13px; }
-    section { margin-top: 43px; }
-    .section-heading { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
-    .section-heading::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-    .section-heading h2 { margin: 0; font-size: 17px; line-height: 1.5; letter-spacing: -.01em; }
-    .section-icon { color: var(--faint); font-size: 16px; line-height: 1; }
-    .news-list, .publication-list, .research-list, .platform-list, .experience-list, .award-list { margin: 0; padding: 0; list-style: none; }
-    .news-item, .publication-item, .research-item, .platform-item, .experience-item, .award-item { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 17px; padding: 11px 0; border-bottom: 1px solid var(--line); }
-    .date, .year { color: var(--faint); font-size: 13px; }
-    .news-item .content, .publication-item .content, .research-item .content, .platform-item .content, .experience-item .content, .award-item .content { min-width: 0; }
-    .news-item p, .research-item p, .platform-item p, .experience-item p, .award-item p { margin: 0; color: var(--muted); }
-    .news-item a, .platform-item a { font-weight: 500; }
-    .publication-item { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 16px; }
-    .publication-item h3 { margin: 0 0 3px; font-size: 14px; font-weight: 600; line-height: 1.55; }
-    .publication-item p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
-    .publication-item .pdf { align-self: start; white-space: nowrap; font-size: 13px; }
-    .research-item, .platform-item { grid-template-columns: 205px minmax(0, 1fr); }
-    .research-item strong, .platform-item strong { font-weight: 600; }
-    .experience-item, .award-item { grid-template-columns: 88px minmax(0, 1fr); }
-    .experience-item strong, .award-item strong { font-weight: 600; }
-    .skill-line { margin-top: 10px; color: var(--muted); font-size: 13px; }
-    .skill-line span + span::before { content: " · "; color: var(--faint); }
-    footer { margin-top: 58px; padding: 20px 0 28px; border-top: 1px solid var(--line); color: var(--faint); font-size: 12px; }
-    .footer-row { display: flex; justify-content: space-between; gap: 18px; }
-    .back-top { color: var(--muted); }
-    @media (max-width: 760px) {
-      .container { width: min(100% - 30px, var(--max)); }
-      .site-header { padding-top: 20px; }
-      .profile { grid-template-columns: 82px minmax(0, 1fr); gap: 14px; }
-      .portrait { width: 76px; height: 76px; }
-      .identity h1 { font-size: 21px; }
-      .socials { grid-column: 1 / -1; justify-content: flex-start; max-width: none; padding-top: 0; }
-      .nav { display: block; overflow-x: auto; padding-bottom: 0; }
-      .nav-links { width: max-content; gap: 20px; }
-      .nav-tools { position: absolute; right: 15px; margin-top: -41px; }
-      .nav-links a { font-size: 13px; }
-      main { padding-top: 28px; }
-      .intro h2 { font-size: 24px; }
-      .intro p { font-size: 14px; line-height: 1.8; }
-      .news-item, .publication-item, .research-item, .platform-item, .experience-item, .award-item { grid-template-columns: 1fr; gap: 2px; }
-      .publication-item .pdf { justify-self: start; }
-      .research-item, .platform-item { gap: 3px; }
-      section { margin-top: 35px; }
-      .footer-row { display: block; }
-      .back-top { display: inline-block; margin-top: 5px; }
+
+    a {
+      color: var(--c-brand-primary);
+      text-decoration: none;
+      transition: color 0.15s ease;
     }
+
+    a:hover {
+      color: var(--c-brand-active);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--c-brand-active);
+      outline-offset: 3px;
+    }
+
+    /* 根级容器查询上下文：摒弃 @media，完全基于容器自身内联尺寸响应 */
+    .page-shell {
+      container-type: inline-size;
+      container-name: page-box;
+      max-width: 66rem;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 4%, 3rem);
+    }
+
+    /* ==========================================================================
+       3. 头部档案与导航容器 (Container Query: header-box)
+       ========================================================================== */
+    .site-header {
+      container-type: inline-size;
+      container-name: header-box;
+      padding-block-start: clamp(1.75rem, 4cqi, 3rem);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 5.75rem minmax(0, 1fr) auto;
+      gap: clamp(1rem, 2.5cqi, 1.5rem);
+      align-items: start;
+    }
+
+    .avatar-picture {
+      display: block;
+      width: 5.75rem;
+      height: 5.75rem;
+      border: 1px solid var(--c-border-hairline);
+      border-radius: 2px;
+      overflow: hidden;
+      background-color: var(--c-surface);
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .identity-title {
+      margin: -0.15rem 0 0.25rem;
+      font-size: clamp(1.35rem, 3cqi, 1.65rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--c-text-primary);
+    }
+
+    .identity-meta {
+      color: var(--c-text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.1rem;
+      margin-block-start: 0.45rem;
+      font-size: 0.84rem;
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+    }
+
+    .external-socials {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.85rem;
+      font-size: 0.84rem;
+    }
+
+    /* 容器查询替代媒体查询：当头部容器宽度小于 40rem 时自动折叠社交栏 */
+    @container header-box (inline-size < 40rem) {
+      .profile-grid {
+        grid-template-columns: 4.75rem minmax(0, 1fr);
+      }
+      .avatar-picture {
+        width: 4.75rem;
+        height: 4.75rem;
+      }
+      .external-socials {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        padding-block-start: 0.25rem;
+      }
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-block-start: 1.75rem;
+      border-block-end: 1px solid var(--c-border-hairline);
+    }
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2.8cqi, 1.75rem);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-item {
+      padding-block: 0.65rem;
+      color: var(--c-text-secondary);
+      font-size: 0.88rem;
+      font-weight: 500;
+      white-space: nowrap;
+      border-block-end: 2px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--c-text-primary);
+      text-decoration: none;
+    }
+
+    .nav-item[data-active="true"] {
+      color: var(--c-brand-primary);
+      border-block-end-color: var(--c-brand-primary);
+      font-weight: 600;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .tool-btn {
+      padding: 0.25rem 0.55rem;
+      border: 1px solid var(--c-border-hairline);
+      border-radius: 2px;
+      background-color: var(--c-surface);
+      color: var(--c-text-secondary);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tool-btn:hover {
+      color: var(--c-brand-primary);
+      border-color: var(--c-brand-primary);
+    }
+
+    /* ==========================================================================
+       4. 主体章节与条目级容器查询 (Container Query: section-box / row-box)
+       ========================================================================== */
+    .main-content {
+      padding-block: clamp(1.75rem, 4cqi, 2.75rem) 1.5rem;
+    }
+
+    .intro-block p {
+      margin: 0 0 1rem;
+      color: var(--c-text-secondary);
+      font-size: clamp(0.92rem, 1.6cqi, 1rem);
+      line-height: 1.85;
+      max-width: 62rem;
+    }
+
+    .metrics-strip {
+      margin-block-start: 1.25rem;
+      padding-block: 0.55rem;
+      border-block: 1px solid var(--c-border-hairline);
+      color: var(--c-text-meta);
+      font-size: 0.82rem;
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+      letter-spacing: -0.01em;
+    }
+
+    .academic-section {
+      container-type: inline-size;
+      container-name: section-box;
+      margin-block-start: clamp(2.25rem, 5cqi, 3rem);
+      scroll-margin-block-start: 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-block-end: 0.5rem;
+    }
+
+    .section-index {
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--c-text-meta);
+      font-weight: 500;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--c-text-primary);
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background-color: var(--c-border-hairline);
+      align-self: center;
+    }
+
+    .record-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .record-row-wrapper {
+      container-type: inline-size;
+      container-name: row-box;
+      border-block-end: 1px solid var(--c-border-hairline);
+    }
+
+    /* 标准双栏行（动态、荣誉、经历） */
+    .row-standard {
+      display: grid;
+      grid-template-columns: 6.25rem minmax(0, 1fr);
+      gap: clamp(0.75rem, 2cqi, 1.25rem);
+      padding-block: 0.7rem;
+      align-items: baseline;
+    }
+
+    /* 论文三栏行（年份、题录详情、DOI链接） */
+    .row-publication {
+      display: grid;
+      grid-template-columns: 4rem minmax(0, 1fr) auto;
+      gap: clamp(0.75rem, 2cqi, 1.25rem);
+      padding-block: 0.8rem;
+      align-items: baseline;
+    }
+
+    /* 宽标签双栏行（研究方向、项目平台、联系方式） */
+    .row-labeled {
+      display: grid;
+      grid-template-columns: 13.5rem minmax(0, 1fr);
+      gap: clamp(0.75rem, 2cqi, 1.25rem);
+      padding-block: 0.75rem;
+      align-items: baseline;
+    }
+
+    /* 基于条目自身容器宽度的自适应降维（彻底取代 @media） */
+    @container row-box (inline-size < 36rem) {
+      .row-standard,
+      .row-publication,
+      .row-labeled {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+    }
+
+    .cell-time {
+      color: var(--c-text-meta);
+      font-size: 0.82rem;
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cell-label {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--c-text-primary);
+    }
+
+    .cell-body {
+      min-width: 0;
+    }
+
+    .cell-body p {
+      margin: 0;
+      color: var(--c-text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .pub-title {
+      margin: 0 0 0.2rem;
+      font-size: 0.94rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .pub-meta {
+      margin: 0;
+      color: var(--c-text-secondary);
+      font-size: 0.84rem;
+    }
+
+    .pub-action {
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .award-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-block-end: 0.15rem;
+    }
+
+    .award-title {
+      font-weight: 600;
+      font-size: 0.93rem;
+      color: var(--c-text-primary);
+    }
+
+    .award-badge {
+      display: inline-block;
+      padding: 0.08rem 0.45rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--c-award-highlight);
+      background-color: var(--c-award-bg);
+      border-radius: 2px;
+    }
+
+    .credential-bar {
+      margin-block-start: 0.75rem;
+      color: var(--c-text-secondary);
+      font-size: 0.83rem;
+    }
+
+    .credential-item + .credential-item::before {
+      content: " · ";
+      color: var(--c-text-meta);
+    }
+
+    .site-footer {
+      margin-block-start: 3.5rem;
+      padding-block: 1.25rem 2rem;
+      border-block-start: 1px solid var(--c-border-hairline);
+      color: var(--c-text-meta);
+      font-size: 0.78rem;
+    }
+
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
     @media print {
-      .nav, .socials, .nav-tools, .back-top { display: none; }
-      .container { width: 100%; }
-      body { background: #fff; color: #222; }
-      a { color: #222; }
+      .nav-bar, .external-socials, .toolbar, .back-top-link {
+        display: none !important;
+      }
+      .page-shell {
+        max-width: 100%;
+        padding: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <header class="site-header container" id="top">
-    <div class="profile">
-      <img class="portrait" src="assets/avatar.jpg" alt="庄智尧个人照片" width="92" height="92">
-      <div class="identity">
-        <h1 data-zh="庄智尧" data-en="Zhuang Zhiyao">庄智尧</h1>
-        <div class="role" data-zh="药物化学硕士（AIDD）" data-en="M.S. in Medicinal Chemistry (AIDD)">药物化学硕士（AIDD）</div>
-        <div class="affiliation" data-zh="中国海洋大学 · 预计 2027 年毕业" data-en="Ocean University of China · Expected graduation in 2027">中国海洋大学 · 2024 - 2027 年</div>
-        <div class="links">
-          <a href="mailto:944809681@qq.com">944809681@qq.com</a>
-          <a href="https://github.com/Zzy522" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://www.molgluedb.com/" target="_blank" rel="noreferrer">MolGlueDB</a>
-          <a href="https://labcopai.com/" target="_blank" rel="noreferrer">Lab Copilot</a>
-        </div>
-      </div>
-      <div class="socials">
-        <a href="https://github.com/Zzy522" target="_blank" rel="noreferrer" aria-label="GitHub">GitHub</a>
-        <a href="mailto:944809681@qq.com" aria-label="Email">Email</a>
-        <a href="https://www.molgluedb.com/" target="_blank" rel="noreferrer" aria-label="MolGlueDB">Research</a>
-      </div>
-    </div>
-    <nav class="nav" aria-label="Primary navigation">
-      <div class="nav-links">
-        <a class="active" href="#about" data-zh="关于" data-en="About">关于</a>
-        <a href="#publications" data-zh="论文" data-en="Publications">论文</a>
-        <a href="#projects" data-zh="项目" data-en="Projects">项目</a>
-        <a href="#research" data-zh="研究" data-en="Research">研究</a>
-        <a href="#contact" data-zh="联系" data-en="Contact">联系</a>
-      </div>
-      <div class="nav-tools">
-        <button id="langToggle" type="button" aria-label="Switch language">EN</button>
-        <button id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
-      </div>
-    </nav>
-  </header>
-
-  <main class="container">
-    <section class="intro" id="about">
-      <p data-zh="我的研究围绕AI辅助分子胶与 PROTAC 降解剂设计、药物化学文献的数据挖掘、分子性质预测和智能体工作流展开。我能够独立完成数据构建、模型训练与评测、Agent 工作流开发、工具调用和相关部署。" data-en="My research focuses on molecular glue and PROTAC degraders, literature-scale structure–activity mining, molecular property prediction, and agentic workflows. I work across data construction, model training and evaluation, agent development, tool calling, and deployment. My current interest is to connect medicinal-chemistry expertise, protein information, and generative models for lead discovery and candidate screening.">我的研究围绕分子胶与 PROTAC 降解剂、结构—活性文献挖掘、分子性质预测和智能体工作流展开。我能够独立完成数据构建、模型训练与评测、Agent 工作流开发、工具调用和系统部署。当前主要研究方向是将药物化学专家知识、蛋白信息和生成模型连接起来，用于先导发现与候选分子筛选。</p>
-      <p data-zh="除科研工作外，我也关注科学数据库、科研软件和面向真实业务场景的 Agent 产品化。" data-en="Beyond research, I am interested in scientific databases, research software, and productizing agents for real scientific workflows.">除科研工作外，我也关注科学数据库、科研软件和面向真实业务场景的 Agent 产品化。</p>
-      <div class="facts" data-zh="MolGlueDB 22,000+ 次访问 · MedChem Agent 13,500+ 条评测样本 · 核心提取效率提升 6 倍以上" data-en="22,000+ MolGlueDB visits · 13,500+ MedChem Agent evaluation samples · More than 6× faster core extraction">MolGlueDB 22,000+ 次访问 · MedChem Agent 13,500+ 条评测样本 · 核心提取效率提升 6 倍以上</div>
-    </section>
-
-    <section id="news">
-      <div class="section-heading"><span class="section-icon">▦</span><h2 data-zh="动态" data-en="News">动态</h2></div>
-      <ul class="news-list">
-        <li class="news-item"><span class="date">2025</span><div class="content"><a href="https://www.molgluedb.com/" target="_blank" rel="noreferrer" data-zh="MolGlueDB 分子胶数据库发表于 Nucleic Acids Research（共同第一作者）" data-en="MolGlueDB molecular glue database published in Nucleic Acids Research (joint first author)">MolGlueDB 分子胶数据库发表于 Nucleic Acids Research（共同第一作者）</a></div></li>
-        <li class="news-item"><span class="date">2025</span><div class="content"><span data-zh="中国研究生创新实践系列大赛-企业管理创新大赛 国家二等奖" data-en="CPIPC-CPEMIC">中国研究生创新实践系列大赛-企业管理创新大赛 国家二等奖</span></div></li>
-        <li class="news-item"><span class="date">2026</span><div class="content"><a href="https://doi.org/10.64898/2026.08.08.739980v1" target="_blank" rel="noreferrer" data-zh="MG2Act 分子胶活性预测模型发布 bioRxiv 预印本，论文在 Nature Communications 审稿中" data-en="MG2Act molecular glue activity prediction preprint posted on bioRxiv; manuscript under review at Nature Communications">MG2Act 分子胶活性预测模型发布 bioRxiv 预印本，论文在 Nature Communications 审稿中</a></div></li>
-        <li class="news-item"><span class="date">2026</span><div class="content"><span data-zh="完成 MedChem Agent 与 MolGlueDB-v2 的多智能体文献抽取和数据库更新工作流开发。" data-en="Developed a multi-agent literature-mining and continuous database-updating workflow for MedChem Agent and MolGlueDB-v2.">完成 MedChem Agent 与 MolGlueDB-v2 的多智能体文献抽取和数据库更新工作流开发。</span></div></li>
-        <li class="news-item"><span class="date">2026</span><div class="content"><span data-zh="Lab Copilot 获数据要素 × 山东省决赛路演优秀奖。" data-en="Lab Copilot received an Excellence Award at the Shandong Data Elements final roadshow.">Lab Copilot 获数据要素 × 山东省决赛路演优秀奖。</span></div></li>
-        <li class="news-item"><span class="date">2026</span><div class="content"><span data-zh="中国研究生创新实践系列大赛-企业管理创新大赛 国家一等奖" data-en="CPIPC-CPEMIC">中国研究生创新实践系列大赛-企业管理创新大赛 国家一等奖</span></div></li>
-        <li class="news-item"><span class="date">2026</span><div class="content"><span data-zh="国家奖学金" data-en="National Scholarship">国家奖学金</span></div></li>
-      </ul>
-    </section>
-
-    <section id="publications">
-      <div class="section-heading"><span class="section-icon">▤</span><h2 data-zh="代表性论文" data-en="Selected publications">代表性论文</h2></div>
-      <ul class="publication-list">
-        <li class="publication-item"><span class="year">2026</span><div class="content"><h3><a href="https://www.molgluedb.com/" target="_blank" rel="noreferrer">MolGlueDB: a comprehensive molecular glue database</a></h3><p>Nucleic Acids Research · <strong data-zh="共同第一作者" data-en="Joint first author">共同第一作者</strong></p></div><a class="pdf" href="https://doi.org/10.1093/nar/gkaf811" target="_blank" rel="noreferrer">DOI</a></li>
-        <li class="publication-item"><span class="year">2026</span><div class="content"><h3><a href="https://doi.org/10.64898/2026.08.08.739980v1" target="_blank" rel="noreferrer">MG2Act: molecular glue activity prediction</a></h3><p>bioRxiv preprint · <strong data-zh="第一作者 · Nature Communications 在审" data-en="First author · under review at Nature Communications">第一作者 · Nature Communications 在审</strong></p></div><a class="pdf" href="https://doi.org/10.64898/2026.08.08.739980v1" target="_blank" rel="noreferrer">DOI</a></li>
-        <li class="publication-item"><span class="year">2027</span><div class="content"><h3><a href="https://www.cpa.org.cn/index.php?cid=74102&do=info" target="_blank" rel="noreferrer" data-zh="基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价" data-en="AI-assisted design, screening, and activity evaluation of CK1α molecular glue degraders">基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价</a></h3><p data-zh="《中国海洋药物》 · 第一作者 · 已接收，待刊" data-en="Chinese Journal of Marine Drugs · First author · Accepted, forthcoming">《中国海洋药物》 · 第一作者 · 已接收，待刊</p></div><a class="pdf" href="https://www.cpa.org.cn/index.php?cid=74102&do=info" target="_blank" rel="noreferrer">Link</a></li>
-        <li class="publication-item"><span class="year">2026</span><div class="content"><h3><a href="https://doi.org/10.1021/acs.jmedchem.5c03843" target="_blank" rel="noreferrer">Discovery of an Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide CRBN-Binding Motif for Transdermal Treatment of Androgenetic Alopecia</a></h3><p>Journal of Medicinal Chemistry · <strong data-zh="共同作者 · 参与分子设计与化学合成" data-en="Co-author · contributed to molecular design and synthesis">共同作者 · 参与分子设计与化学合成</strong></p></div><a class="pdf" href="https://doi.org/10.1021/acs.jmedchem.5c03843" target="_blank" rel="noreferrer">DOI</a></li>
-        <li class="publication-item"><span class="year">2023</span><div class="content"><h3><a href="https://doi.org/10.1016/j.ejmech.2023.115404" target="_blank" rel="noreferrer">Deciphering the multifunctional role of dual leucine zipper kinase (DLK) and its therapeutic potential in disease</a></h3><p>European Journal of Medicinal Chemistry · <strong data-zh="共同作者" data-en="Co-author">共同作者</strong></p></div><a class="pdf" href="https://doi.org/10.1016/j.ejmech.2023.115404" target="_blank" rel="noreferrer">DOI</a></li>
-      </ul>
-    </section>
-
-    <section id="research">
-      <div class="section-heading"><span class="section-icon">◌</span><h2 data-zh="研究方向" data-en="Research">研究方向</h2></div>
-      <ul class="research-list">
-        <li class="research-item"><strong data-zh="AI4S 与 AI 辅助药物发现" data-en="AI for Science & AI-driven drug discovery">AI4S 与 AI 辅助药物发现</strong><p data-zh="分子胶降解剂、PROTAC、分子性质预测、虚拟筛选与候选分子设计。" data-en="Molecular glue degraders, PROTACs, molecular property prediction, virtual screening, and candidate design.">分子胶降解剂、PROTAC、分子性质预测、虚拟筛选与候选分子设计。</p></li>
-        <li class="research-item"><strong data-zh="药物化学智能体" data-en="Medicinal-chemistry agents">药物化学智能体</strong><p data-zh="文献结构—活性抽取、SAR 分析、知识库更新、多智能体协同与 Agent Benchmark。" data-en="Literature-scale structure–activity extraction, SAR analysis, knowledge-base updating, multi-agent collaboration, and agent benchmarks.">文献结构—活性抽取、SAR 分析、知识库更新、多智能体协同与 Agent Benchmark。</p></li>
-        <li class="research-item"><strong data-zh="数据与模型" data-en="Data & modeling">数据与模型</strong><p>Python · PyTorch · RDKit · OCR · Structure standardization · Model training and evaluation</p></li>
-        <li class="research-item"><strong data-zh="系统与工具" data-en="Systems & tools">系统与工具</strong><p>Vue 3 · Flask · D3.js · LangGraph · Agent Skills · Tool Calling · Cursor · Codex</p></li>
-      </ul>
-    </section>
-
-    <section id="projects">
-      <div class="section-heading"><span class="section-icon">↗</span><h2 data-zh="项目与平台" data-en="Projects & platforms">项目与平台</h2></div>
-      <ul class="platform-list">
-        <li class="platform-item"><strong><a href="https://www.molgluedb.com/" target="_blank" rel="noreferrer">MolGlueDB</a></strong><p data-zh="分子胶在线数据库；独立完成数据构建、Vue 3 + Flask 系统、D3.js 可视化与在线部署。" data-en="Online molecular glue database; independently built the data resource, Vue 3 + Flask system, D3.js visualizations, and deployment.">分子胶在线数据库；独立完成数据构建、Vue 3 + Flask 系统、D3.js 可视化与在线部署。</p></li>
-        <li class="platform-item"><strong>MedChem Agent & MolGlueDB-v2</strong><p data-zh="基于 LangGraph 的 11 个专业子 Agent 工作流，覆盖文献解析、OCR、结构识别、活性抽取、证据核验和数据库更新。" data-en="An 11-agent LangGraph workflow covering literature parsing, OCR, structure recognition, activity extraction, evidence verification, and database updates.">基于 LangGraph 的 11 个专业子 Agent 工作流，覆盖文献解析、OCR、结构识别、活性抽取、证据核验和数据库更新。</p></li>
-        <li class="platform-item"><strong>MG2Act</strong><p data-zh="融合分子结构表征与分子胶作用机制的连续活性预测模型；在新靶点 Zero-shot 场景开展候选筛选。" data-en="A continuous activity-prediction model integrating molecular representations and molecular-glue mechanisms; used for candidate screening in new-target zero-shot settings.">融合分子结构表征与分子胶作用机制的连续活性预测模型；在新靶点 Zero-shot 场景开展候选筛选。</p></li>
-        <li class="platform-item"><strong><a href="https://labcopai.com/" target="_blank" rel="noreferrer">Lab Copilot</a></strong><p data-zh="高校实验室科研管理 Agent；负责从 0 到 1 的产品开发，融合多模态数据采集、多 Agent 协同和私域知识库。" data-en="A research-management agent for university labs; led 0-to-1 development with multimodal data capture, multi-agent collaboration, and private knowledge bases.">高校实验室科研管理 Agent；负责从 0 到 1 的产品开发，融合多模态数据采集、多 Agent 协同和私域知识库。</p></li>
-      </ul>
-    </section>
-
-    <section id="experience">
-      <div class="section-heading"><span class="section-icon">◎</span><h2 data-zh="教育与经历" data-en="Education & experience">教育与经历</h2></div>
-      <ul class="experience-list">
-        <li class="experience-item"><span class="date">2024—2027</span><div class="content"><strong data-zh="中国海洋大学 · 药物化学硕士（AIDD）" data-en="Ocean University of China · M.S. in Medicinal Chemistry (AIDD)">中国海洋大学 · 药物化学硕士（AIDD）</strong><p data-zh="导师：秦冲 · 预计 2027 年毕业" data-en="Advisor: Qin Chong · Expected graduation in 2027">导师：秦冲 · 预计 2027 年毕业</p></div></li>
-        <li class="experience-item"><span class="date">2020—2024</span><div class="content"><strong data-zh="西南交通大学 · 制药工程" data-en="Southwest Jiaotong University · B.Eng. in Pharmaceutical Engineering">西南交通大学 · 制药工程</strong><p data-zh="导师：张岚" data-en="Advisor: Zhang Lan">导师：张岚</p></div></li>
-        <li class="experience-item"><span class="date">2026.8</span><div class="content"><strong data-zh="上海深度势能科技有限公司 · 科研 Agent 产品运营实习生" data-en="Shanghai Deep Potential Technology · Scientific Agent product intern">上海深度势能科技有限公司 · 科研 Agent 产品运营实习生</strong><p data-zh="开发精准文献推荐 Agent，参与 Agent Benchmark 构建与测评。" data-en="Developed a precision literature-recommendation agent and contributed to Agent Benchmarking.">开发精准文献推荐 Agent，参与 Agent Benchmark 构建与测评。</p></div></li>
-      </ul>
-      <div class="skill-line"><span data-zh="中共党员" data-en="Communist Party member">中共党员</span><span data-zh="英语六级" data-en="CET-6">英语六级</span><span data-zh="国家一级足球裁判员" data-en="National Level-1 football referee">国家一级足球裁判员</span><span data-zh="腾讯云 AI 开发者认证" data-en="Tencent Cloud AI Developer certified">腾讯云 AI 开发者认证</span></div>
-    </section>
-
-    <section id="contact">
-      <div class="section-heading"><span class="section-icon">✉</span><h2 data-zh="联系" data-en="Contact">联系</h2></div>
-      <ul class="platform-list">
-        <li class="platform-item"><strong>Email</strong><p><a href="mailto:944809681@qq.com">944809681@qq.com</a></p></li>
-        <li class="platform-item"><strong>GitHub</strong><p><a href="https://github.com/Zzy522" target="_blank" rel="noreferrer">github.com/Zzy522</a></p></li>
-        <li class="platform-item"><strong>Research</strong><p><a href="https://www.molgluedb.com/" target="_blank" rel="noreferrer">molgluedb.com</a></p></li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="container">
-    <div class="footer-row"><span>© <span id="year"></span> Zhuang Zhiyao</span><a class="back-top" href="#top" data-zh="返回顶部 ↑" data-en="Back to top ↑">返回顶部 ↑</a></div>
-  </footer>
+  <div id="root"></div>
 
   <script>
     (() => {
-      const root = document.documentElement;
-      const langButton = document.getElementById('langToggle');
-      const themeButton = document.getElementById('themeToggle');
-      const translatable = [...document.querySelectorAll('[data-zh][data-en]')];
-      let lang = localStorage.getItem('zzy-language') || (new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'zh');
-      function applyLanguage(next) {
-        lang = next;
-        root.lang = lang === 'zh' ? 'zh-CN' : 'en';
-        translatable.forEach((node) => { node.textContent = node.dataset[lang]; });
-        langButton.textContent = lang === 'zh' ? 'EN' : '中';
-        document.title = lang === 'zh' ? '庄智尧 | AI4S · AIDD · 科研智能体' : 'Zhuang Zhiyao | AI4S · AIDD · Scientific Agents';
-        localStorage.setItem('zzy-language', lang);
+      'use strict';
+
+      const { useState, useEffect, useCallback, useMemo, memo } = React;
+      const h = React.createElement;
+
+      /* ========================================================================
+         静态双语学术数据仓库 (冻结对象防止意外变更)
+         ======================================================================== */
+      const ACADEMIC_DATA = Object.freeze({
+        profile: {
+          name: { zh: '庄智尧', en: 'Zhuang Zhiyao' },
+          role: { zh: '药物化学硕士（AIDD）', en: 'M.S. in Medicinal Chemistry (AIDD)' },
+          affiliation: { zh: '中国海洋大学 · 预计 2027 年毕业', en: 'Ocean University of China · Expected Graduation 2027' },
+          avatar: {
+            src1x: 'assets/avatar.jpg',
+            src2x: 'assets/avatar@2x.jpg',
+            src3x: 'assets/avatar@3x.jpg',
+            alt: { zh: '庄智尧个人学术照片', en: 'Academic portrait of Zhuang Zhiyao' }
+          },
+          quickLinks: [
+            { id: 'email', label: '944809681@qq.com', href: 'mailto:944809681@qq.com', external: false },
+            { id: 'github', label: 'GitHub', href: 'https://github.com/Zzy522', external: true },
+            { id: 'molgluedb', label: 'MolGlueDB', href: 'https://www.molgluedb.com/', external: true },
+            { id: 'labcopilot', label: 'Lab Copilot', href: 'https://labcopai.com/', external: true }
+          ],
+          socials: [
+            { id: 's-gh', label: 'GitHub', href: 'https://github.com/Zzy522' },
+            { id: 's-em', label: 'Email', href: 'mailto:944809681@qq.com' },
+            { id: 's-rs', label: 'MolGlueDB', href: 'https://www.molgluedb.com/' }
+          ]
+        },
+        nav: [
+          { id: 'about', zh: '关于', en: 'About' },
+          { id: 'news', zh: '动态', en: 'News' },
+          { id: 'publications', zh: '论文', en: 'Publications' },
+          { id: 'research', zh: '研究', en: 'Research' },
+          { id: 'projects', zh: '项目', en: 'Projects' },
+          { id: 'awards', zh: '荣誉', en: 'Awards' },
+          { id: 'experience', zh: '经历', en: 'Experience' },
+          { id: 'contact', zh: '联系', en: 'Contact' }
+        ],
+        intro: {
+          paragraphs: [
+            {
+              id: 'p1',
+              zh: '我的研究围绕 AI 辅助分子胶与 PROTAC 降解剂设计、药物化学文献的数据挖掘、分子性质预测和智能体工作流展开。我能够独立完成数据构建、模型训练与评测、Agent 工作流开发、工具调用和系统部署。当前主要研究方向是将药物化学专家知识、蛋白信息和生成模型连接起来，用于先导发现与候选分子筛选。',
+              en: 'My research centers on AI-assisted design of molecular glue and PROTAC degraders, literature-scale structure–activity data mining, molecular property prediction, and agentic workflows. I work independently across dataset curation, model training and evaluation, multi-agent workflow engineering, tool calling, and production deployment. Currently, I focus on bridging medicinal chemistry domain expertise, protein representations, and generative models for lead discovery and candidate screening.'
+            },
+            {
+              id: 'p2',
+              zh: '除科研工作外，我也关注科学数据库、科研软件和面向真实业务场景的 Agent 产品化。',
+              en: 'Beyond academic research, I build scientific databases, research software, and production-ready agent systems tailored for real-world laboratory workflows.'
+            }
+          ],
+          metrics: {
+            zh: 'MolGlueDB 22,000+ 次访问 · MedChem Agent 13,500+ 条评测样本 · 核心提取效率提升 6 倍以上',
+            en: '22,000+ MolGlueDB Visits · 13,500+ MedChem Agent Benchmark Samples · >6× Core Extraction Speedup'
+          }
+        },
+        news: [
+          {
+            id: 'n-2026-sch',
+            date: '2026',
+            zh: '获评 2026 年研究生国家奖学金、小米奖学金及中国海洋大学文体奖学金。',
+            en: 'Awarded the 2026 Graduate National Scholarship, Xiaomi Scholarship, and OUC Sports & Arts Scholarship.'
+          },
+          {
+            id: 'n-2026-mg2act',
+            date: '2026',
+            href: 'https://doi.org/10.64898/2026.08.08.739980v1',
+            zh: 'MG2Act 分子胶活性预测模型发布 bioRxiv 预印本，论文在 Nature Communications 审稿中。',
+            en: 'MG2Act molecular glue activity prediction preprint posted on bioRxiv; manuscript under review at Nature Communications.'
+          },
+          {
+            id: 'n-2026-agent',
+            date: '2026',
+            zh: '完成 MedChem Agent 与 MolGlueDB-v2 的多智能体文献抽取和数据库更新工作流开发。',
+            en: 'Completed the multi-agent literature extraction and automated database updating workflow for MedChem Agent and MolGlueDB-v2.'
+          },
+          {
+            id: 'n-2026-cpipc',
+            date: '2026',
+            zh: '获中国研究生创新实践系列大赛—企业管理创新大赛国家一等奖（队长）。',
+            en: 'Won National First Prize in the China Graduate Enterprise Management Innovation Competition (Team Captain).'
+          },
+          {
+            id: 'n-2026-labcop',
+            date: '2026',
+            zh: 'Lab Copilot 获“数据要素 ×”大赛山东省决赛路演优秀奖。',
+            en: 'Lab Copilot received the Excellence Award at the Shandong Final Roadshow of the "Data Elements ×" Competition.'
+          },
+          {
+            id: 'n-2025-nar',
+            date: '2025',
+            href: 'https://www.molgluedb.com/',
+            zh: 'MolGlueDB 分子胶数据库正式发表于 Nucleic Acids Research（共同第一作者）。',
+            en: 'MolGlueDB molecular glue database published in Nucleic Acids Research (Joint First Author).'
+          },
+          {
+            id: 'n-2025-cpipc',
+            date: '2025',
+            zh: '获中国研究生创新实践系列大赛—企业管理创新大赛国家二等奖（队长）。',
+            en: 'Won National Second Prize in the China Graduate Enterprise Management Innovation Competition (Team Captain).'
+          }
+        ],
+        publications: [
+          {
+            id: 'pub-nar',
+            year: '2026',
+            title: { zh: 'MolGlueDB: a comprehensive molecular glue database', en: 'MolGlueDB: a comprehensive molecular glue database' },
+            venue: 'Nucleic Acids Research',
+            role: { zh: '共同第一作者', en: 'Joint First Author' },
+            url: 'https://www.molgluedb.com/',
+            actionLabel: 'DOI',
+            actionUrl: 'https://doi.org/10.1093/nar/gkaf811'
+          },
+          {
+            id: 'pub-mg2act',
+            year: '2026',
+            title: { zh: 'MG2Act: molecular glue activity prediction', en: 'MG2Act: molecular glue activity prediction' },
+            venue: 'bioRxiv Preprint',
+            role: { zh: '第一作者 · Nature Communications 在审', en: 'First Author · Under Review at Nature Communications' },
+            url: 'https://doi.org/10.64898/2026.08.08.739980v1',
+            actionLabel: 'DOI',
+            actionUrl: 'https://doi.org/10.64898/2026.08.08.739980v1'
+          },
+          {
+            id: 'pub-ck1a',
+            year: '2027',
+            title: {
+              zh: '基于人工智能的 CK1α 分子胶降解剂设计筛选及其活性评价',
+              en: 'AI-assisted design, screening, and activity evaluation of CK1α molecular glue degraders'
+            },
+            venue: { zh: '《中国海洋药物》', en: 'Chinese Journal of Marine Drugs' },
+            role: { zh: '第一作者 · 已接收，待刊', en: 'First Author · Accepted, Forthcoming' },
+            url: 'https://www.cpa.org.cn/index.php?cid=74102&do=info',
+            actionLabel: 'Link',
+            actionUrl: 'https://www.cpa.org.cn/index.php?cid=74102&do=info'
+          },
+          {
+            id: 'pub-jmc',
+            year: '2026',
+            title: {
+              zh: 'Discovery of an Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide CRBN-Binding Motif for Transdermal Treatment of Androgenetic Alopecia',
+              en: 'Discovery of an Androgen Receptor Degrader Featuring a Pyridazinyl Glutarimide CRBN-Binding Motif for Transdermal Treatment of Androgenetic Alopecia'
+            },
+            venue: 'Journal of Medicinal Chemistry',
+            role: { zh: '共同作者 · 参与分子设计与化学合成', en: 'Co-author · Contributed to Molecular Design and Chemical Synthesis' },
+            url: 'https://doi.org/10.1021/acs.jmedchem.5c03843',
+            actionLabel: 'DOI',
+            actionUrl: 'https://doi.org/10.1021/acs.jmedchem.5c03843'
+          },
+          {
+            id: 'pub-ejmc',
+            year: '2023',
+            title: {
+              zh: 'Deciphering the multifunctional role of dual leucine zipper kinase (DLK) and its therapeutic potential in disease',
+              en: 'Deciphering the multifunctional role of dual leucine zipper kinase (DLK) and its therapeutic potential in disease'
+            },
+            venue: 'European Journal of Medicinal Chemistry',
+            role: { zh: '共同作者', en: 'Co-author' },
+            url: 'https://doi.org/10.1016/j.ejmech.2023.115404',
+            actionLabel: 'DOI',
+            actionUrl: 'https://doi.org/10.1016/j.ejmech.2023.115404'
+          }
+        ],
+        research: [
+          {
+            id: 'res-aidd',
+            label: { zh: 'AI4S 与 AI 辅助药物发现', en: 'AI4S & AI Drug Discovery' },
+            desc: {
+              zh: '分子胶降解剂、PROTAC、分子性质预测、虚拟筛选与候选分子设计。',
+              en: 'Molecular glue degraders, PROTACs, molecular property prediction, virtual screening, and candidate generation.'
+            }
+          },
+          {
+            id: 'res-agent',
+            label: { zh: '药物化学智能体', en: 'Medicinal Chemistry Agents' },
+            desc: {
+              zh: '文献结构—活性抽取、SAR 分析、知识库更新、多智能体协同与 Agent Benchmark。',
+              en: 'Literature-scale structure–activity extraction, SAR analysis, knowledge-base updating, multi-agent collaboration, and benchmarks.'
+            }
+          },
+          {
+            id: 'res-data',
+            label: { zh: '数据与模型架构', en: 'Data & Modeling Stack' },
+            desc: {
+              zh: 'Python · PyTorch · RDKit · 化学结构 OCR · 分子标准化 · 深度学习模型训练与评测',
+              en: 'Python · PyTorch · RDKit · Chemical OCR · Structure Standardization · Deep Learning Training & Evaluation'
+            }
+          },
+          {
+            id: 'res-sys',
+            label: { zh: '系统与工程工具', en: 'Systems & Engineering' },
+            desc: {
+              zh: 'Vue 3 · Flask · D3.js · LangGraph · Agent Skills · Tool Calling · Cursor · Codex',
+              en: 'Vue 3 · Flask · D3.js · LangGraph · Agent Skills · Tool Calling · Cursor · Codex'
+            }
+          }
+        ],
+        projects: [
+          {
+            id: 'proj-molgluedb',
+            name: 'MolGlueDB',
+            href: 'https://www.molgluedb.com/',
+            desc: {
+              zh: '分子胶在线数据库；独立完成数据构建、Vue 3 + Flask 系统架构、D3.js 可视化与在线部署。',
+              en: 'Online molecular glue database; independently built the curated dataset, Vue 3 + Flask backend, D3.js visualizations, and cloud deployment.'
+            }
+          },
+          {
+            id: 'proj-medchem',
+            name: 'MedChem Agent & MolGlueDB-v2',
+            desc: {
+              zh: '基于 LangGraph 的 11 个专业子 Agent 工作流，覆盖文献解析、OCR、结构识别、活性抽取、证据核验和数据库更新。',
+              en: 'An 11-agent LangGraph workflow orchestrating literature parsing, OCR, chemical structure recognition, bioactivity extraction, evidence verification, and database updates.'
+            }
+          },
+          {
+            id: 'proj-mg2act',
+            name: 'MG2Act',
+            desc: {
+              zh: '融合分子结构表征与分子胶作用机制的连续活性预测模型；在新靶点 Zero-shot 场景开展候选筛选。',
+              en: 'Continuous activity prediction model integrating molecular representations with ternary degradation mechanisms; applied to zero-shot candidate screening on novel targets.'
+            }
+          },
+          {
+            id: 'proj-labcop',
+            name: 'Lab Copilot',
+            href: 'https://labcopai.com/',
+            desc: {
+              zh: '高校实验室科研管理 Agent；负责从 0 到 1 的产品开发，融合多模态数据采集、多 Agent 协同和私域知识库。',
+              en: 'Research management agent for university laboratories; led 0-to-1 product engineering combining multimodal capture, multi-agent coordination, and private knowledge bases.'
+            }
+          }
+        ],
+        awards: [
+          {
+            id: 'aw-nat-2026',
+            year: '2026',
+            title: { zh: '研究生国家奖学金', en: 'Graduate National Scholarship' },
+            badge: { zh: '国家级最高荣誉', en: 'National Honor' },
+            issuer: { zh: '中华人民共和国教育部', en: 'Ministry of Education of the People’s Republic of China' },
+            highlight: true
+          },
+          {
+            id: 'aw-xiaomi-2026',
+            year: '2026',
+            title: { zh: '小米奖学金', en: 'Xiaomi Scholarship' },
+            badge: { zh: '专项奖学金', en: 'Prestigious Fellowship' },
+            issuer: { zh: '北京小米公益基金会 · 中国海洋大学', en: 'Xiaomi Foundation · Ocean University of China' },
+            highlight: true
+          },
+          {
+            id: 'aw-ouc-2026',
+            year: '2026',
+            title: { zh: '中国海洋大学文体奖学金', en: 'OUC Sports & Arts Scholarship' },
+            issuer: { zh: '中国海洋大学', en: 'Ocean University of China' },
+            highlight: false
+          },
+          {
+            id: 'aw-cpipc-2026',
+            year: '2026',
+            title: {
+              zh: '中国研究生企业管理创新大赛 国家一等奖',
+              en: 'National First Prize, China Graduate Enterprise Management Innovation Competition'
+            },
+            badge: { zh: '国家一等奖 · 队长', en: '1st Prize · Captain' },
+            issuer: { zh: '中国研究生创新实践系列大赛', en: 'China Postgraduate Innovation & Practice Competitions (CPIPC)' },
+            highlight: true
+          },
+          {
+            id: 'aw-data-2026',
+            year: '2026',
+            title: {
+              zh: '“数据要素 ×”大赛山东省决赛 路演优秀奖',
+              en: 'Excellence Award, Shandong Final of "Data Elements ×" Competition'
+            },
+            issuer: { zh: 'Lab Copilot 项目负责人', en: 'Project Lead for Lab Copilot' },
+            highlight: false
+          },
+          {
+            id: 'aw-cpipc-2025',
+            year: '2025',
+            title: {
+              zh: '中国研究生企业管理创新大赛 国家二等奖',
+              en: 'National Second Prize, China Graduate Enterprise Management Innovation Competition'
+            },
+            issuer: { zh: '中国研究生创新实践系列大赛（队长）', en: 'China Postgraduate Innovation & Practice Competitions (Team Captain)' },
+            highlight: false
+          }
+        ],
+        experience: [
+          {
+            id: 'exp-ouc',
+            period: '2024—2027',
+            title: { zh: '中国海洋大学 · 药物化学硕士（AIDD）', en: 'Ocean University of China · M.S. in Medicinal Chemistry (AIDD)' },
+            detail: { zh: '导师：秦冲 教授 · 青岛海洋生物医药研究院', en: 'Advisor: Prof. Qin Chong · Qingdao Marine Biomedical Research Institute' }
+          },
+          {
+            id: 'exp-dp',
+            period: '2026.08',
+            title: { zh: '上海深度势能科技有限公司 · 科研 Agent 产品运营实习生', en: 'Shanghai Deep Potential Technology · Scientific Agent Product Intern' },
+            detail: { zh: '开发精准文献推荐 Agent，参与科研 Agent Benchmark 构建与系统评测。', en: 'Developed a precision literature-recommendation agent and contributed to Scientific Agent Benchmark construction.' }
+          },
+          {
+            id: 'exp-swjtu',
+            period: '2020—2024',
+            title: { zh: '西南交通大学 · 制药工程学士', en: 'Southwest Jiaotong University · B.Eng. in Pharmaceutical Engineering' },
+            detail: { zh: '导师：张岚 教授', en: 'Advisor: Prof. Zhang Lan' }
+          }
+        ],
+        credentials: [
+          { id: 'cred-1', zh: '中共党员', en: 'CPC Member' },
+          { id: 'cred-2', zh: '英语六级 (CET-6)', en: 'CET-6 Certified' },
+          { id: 'cred-3', zh: '国家一级足球裁判员', en: 'National Level-1 Football Referee' },
+          { id: 'cred-4', zh: '腾讯云 AI 开发者认证', en: 'Tencent Cloud AI Developer Certified' }
+        ],
+        contacts: [
+          { id: 'ct-email', label: 'Email', value: '944809681@qq.com', href: 'mailto:944809681@qq.com', external: false },
+          { id: 'ct-gh', label: 'GitHub', value: 'github.com/Zzy522', href: 'https://github.com/Zzy522', external: true },
+          { id: 'ct-db', label: 'MolGlueDB', value: 'molgluedb.com', href: 'https://www.molgluedb.com/', external: true }
+        ]
+      });
+
+      /* ========================================================================
+         子组件 1: 响应式高分头像 (支持 srcset / sizes 密度协商，避免模糊与 CLS)
+         ======================================================================== */
+      const ResponsivePortrait = memo(function ResponsivePortrait({ src1x, src2x, src3x, altText }) {
+        const srcSetString = useMemo(
+          () => `${src1x} 1x, ${src2x} 2x, ${src3x} 3x`,
+          [src1x, src2x, src3x]
+        );
+
+        return h(
+          'picture',
+          { className: 'avatar-picture' },
+          h('source', {
+            srcSet: srcSetString,
+            sizes: '(max-width: 640px) 76px, 92px'
+          }),
+          h('img', {
+            className: 'avatar-img',
+            src: src1x,
+            srcSet: srcSetString,
+            sizes: '(max-width: 640px) 76px, 92px',
+            alt: altText,
+            width: 92,
+            height: 92,
+            loading: 'eager',
+            decoding: 'async'
+          })
+        );
+      });
+
+      ResponsivePortrait.propTypes = {
+        src1x: PropTypes.string.isRequired,
+        src2x: PropTypes.string.isRequired,
+        src3x: PropTypes.string.isRequired,
+        altText: PropTypes.string.isRequired
+      };
+
+      /* ========================================================================
+         子组件 2: 顶部档案与导航栏 (零内联函数作为 prop，完全使用 useCallback)
+         ======================================================================== */
+      const SiteHeader = memo(function SiteHeader({
+        lang,
+        theme,
+        activeSection,
+        onToggleLang,
+        onToggleTheme,
+        onSelectSection
+      }) {
+        const profile = ACADEMIC_DATA.profile;
+
+        const handleNavAnchorClick = useCallback((event) => {
+          const sectionId = event.currentTarget.getAttribute('data-section');
+          if (sectionId) {
+            onSelectSection(sectionId);
+          }
+        }, [onSelectSection]);
+
+        const quickLinkElements = useMemo(() => {
+          return profile.quickLinks.map((item) =>
+            h(
+              'a',
+              {
+                key: item.id,
+                href: item.href,
+                target: item.external ? '_blank' : undefined,
+                rel: item.external ? 'noreferrer' : undefined
+              },
+              item.label
+            )
+          );
+        }, [profile.quickLinks]);
+
+        const socialElements = useMemo(() => {
+          return profile.socials.map((item) =>
+            h(
+              'a',
+              {
+                key: item.id,
+                href: item.href,
+                target: item.href.startsWith('http') ? '_blank' : undefined,
+                rel: item.href.startsWith('http') ? 'noreferrer' : undefined
+              },
+              item.label
+            )
+          );
+        }, [profile.socials]);
+
+        const navElements = useMemo(() => {
+          return ACADEMIC_DATA.nav.map((item) =>
+            h(
+              'a',
+              {
+                key: item.id,
+                href: `#${item.id}`,
+                className: 'nav-item',
+                'data-section': item.id,
+                'data-active': String(activeSection === item.id),
+                onClick: handleNavAnchorClick
+              },
+              item[lang]
+            )
+          );
+        }, [lang, activeSection, handleNavAnchorClick]);
+
+        const themeButtonLabel = useMemo(() => {
+          if (lang === 'zh') {
+            return theme === 'dark' ? '浅色' : '深色';
+          }
+          return theme === 'dark' ? 'Light' : 'Dark';
+        }, [lang, theme]);
+
+        return h(
+          'header',
+          { className: 'site-header', id: 'top' },
+          h(
+            'div',
+            { className: 'profile-grid' },
+            h(ResponsivePortrait, {
+              src1x: profile.avatar.src1x,
+              src2x: profile.avatar.src2x,
+              src3x: profile.avatar.src3x,
+              altText: profile.avatar.alt[lang]
+            }),
+            h(
+              'div',
+              { className: 'identity-col' },
+              h('h1', { className: 'identity-title' }, profile.name[lang]),
+              h('div', { className: 'identity-meta' }, profile.role[lang]),
+              h('div', { className: 'identity-meta' }, profile.affiliation[lang]),
+              h('div', { className: 'quick-links' }, quickLinkElements)
+            ),
+            h('div', { className: 'external-socials' }, socialElements)
+          ),
+          h(
+            'nav',
+            { className: 'nav-bar', 'aria-label': 'Primary Navigation' },
+            h('div', { className: 'nav-list' }, navElements),
+            h(
+              'div',
+              { className: 'toolbar' },
+              h(
+                'button',
+                {
+                  type: 'button',
+                  className: 'tool-btn',
+                  onClick: onToggleLang,
+                  'aria-label': 'Switch language'
+                },
+                lang === 'zh' ? 'EN' : '中文'
+              ),
+              h(
+                'button',
+                {
+                  type: 'button',
+                  className: 'tool-btn',
+                  onClick: onToggleTheme,
+                  'aria-label': 'Toggle color theme'
+                },
+                themeButtonLabel
+              )
+            )
+          )
+        );
+      });
+
+      SiteHeader.propTypes = {
+        lang: PropTypes.oneOf(['zh', 'en']).isRequired,
+        theme: PropTypes.oneOf(['light', 'dark']).isRequired,
+        activeSection: PropTypes.string.isRequired,
+        onToggleLang: PropTypes.func.isRequired,
+        onToggleTheme: PropTypes.func.isRequired,
+        onSelectSection: PropTypes.func.isRequired
+      };
+
+      /* ========================================================================
+         子组件 3: 通用章节外壳 (带瑞士网格编号与分割线，消除花哨 Emoji 图标)
+         ======================================================================== */
+      const SectionFrame = memo(function SectionFrame({ id, indexLabel, title, children }) {
+        return h(
+          'section',
+          { id: id, className: 'academic-section' },
+          h(
+            'div',
+            { className: 'section-header' },
+            h('span', { className: 'section-index' }, indexLabel),
+            h('h2', { className: 'section-title' }, title),
+            h('span', { className: 'section-rule', 'aria-hidden': 'true' })
+          ),
+          children
+        );
+      });
+
+      SectionFrame.propTypes = {
+        id: PropTypes.string.isRequired,
+        indexLabel: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        children: PropTypes.node.isRequired
+      };
+
+      /* ========================================================================
+         子组件 4: 荣誉与奖项列表项 (突出 2026 研究生国家奖学金、小米奖学金、海大文体奖学金)
+         ======================================================================== */
+      const AwardRow = memo(function AwardRow({ year, title, badge, issuer, highlight }) {
+        return h(
+          'li',
+          { className: 'record-row-wrapper' },
+          h(
+            'div',
+            { className: 'row-standard' },
+            h('span', { className: 'cell-time' }, year),
+            h(
+              'div',
+              { className: 'cell-body' },
+              h(
+                'div',
+                { className: 'award-header' },
+                h('strong', { className: 'award-title' }, title),
+                highlight && badge
+                  ? h('span', { className: 'award-badge' }, badge)
+                  : null
+              ),
+              h('p', null, issuer)
+            )
+          )
+        );
+      });
+
+      AwardRow.propTypes = {
+        year: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        badge: PropTypes.string,
+        issuer: PropTypes.string.isRequired,
+        highlight: PropTypes.bool.isRequired
+      };
+
+      /* ========================================================================
+         根组件: AcademicPortfolioApp (集中管理状态、副作用清理与 Memo 渲染树)
+         ======================================================================== */
+      function AcademicPortfolioApp() {
+        const [lang, setLang] = useState(() => {
+          const saved = localStorage.getItem('zzy-language');
+          if (saved === 'en' || saved === 'zh') return saved;
+          return new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'zh';
+        });
+
+        const [theme, setTheme] = useState(() => {
+          const saved = localStorage.getItem('zzy-theme');
+          if (saved === 'dark' || saved === 'light') return saved;
+          return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+        });
+
+        const [activeSection, setActiveSection] = useState('about');
+
+        const handleToggleLang = useCallback(() => {
+          setLang((prev) => (prev === 'zh' ? 'en' : 'zh'));
+        }, []);
+
+        const handleToggleTheme = useCallback(() => {
+          setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+        }, []);
+
+        const handleSelectSection = useCallback((sectionId) => {
+          setActiveSection(sectionId);
+        }, []);
+
+        /* 副作用 1: 同步 DOM 根节点语言与标题，包含卸载清理 */
+        useEffect(() => {
+          const root = document.documentElement;
+          root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+          document.title =
+            lang === 'zh'
+              ? '庄智尧 | AI4S · AIDD · 科研智能体'
+              : 'Zhuang Zhiyao | AI4S · AIDD · Scientific Agents';
+          localStorage.setItem('zzy-language', lang);
+          return () => {};
+        }, [lang]);
+
+        /* 副作用 2: 同步主题属性与系统级配色监听，严格清理事件监听器 */
+        useEffect(() => {
+          const root = document.documentElement;
+          root.dataset.theme = theme;
+          localStorage.setItem('zzy-theme', theme);
+
+          const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+          const handleSystemThemeChange = (event) => {
+            if (!localStorage.getItem('zzy-theme')) {
+              setTheme(event.matches ? 'dark' : 'light');
+            }
+          };
+
+          mediaQuery.addEventListener('change', handleSystemThemeChange);
+          return () => {
+            mediaQuery.removeEventListener('change', handleSystemThemeChange);
+          };
+        }, [theme]);
+
+        /* 副作用 3: IntersectionObserver 自动追踪当前阅读章节，卸载时严格 disconnect */
+        useEffect(() => {
+          const sectionIds = ACADEMIC_DATA.nav.map((item) => item.id);
+          const targets = sectionIds
+            .map((id) => document.getElementById(id))
+            .filter(Boolean);
+
+          if (targets.length === 0 || !('IntersectionObserver' in window)) {
+            return () => {};
+          }
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  setActiveSection(entry.target.id);
+                }
+              });
+            },
+            { rootMargin: '-15% 0px -70% 0px', threshold: 0.05 }
+          );
+
+          targets.forEach((el) => observer.observe(el));
+
+          return () => {
+            observer.disconnect();
+          };
+        }, []);
+
+        /* 使用 useMemo 缓存各板块列表节点，避免主题或导航高亮变化时重算内容节点 */
+        const introContent = useMemo(() => {
+          return h(
+            'section',
+            { id: 'about', className: 'intro-block' },
+            ACADEMIC_DATA.intro.paragraphs.map((p) => h('p', { key: p.id }, p[lang])),
+            h('div', { className: 'metrics-strip' }, ACADEMIC_DATA.intro.metrics[lang])
+          );
+        }, [lang]);
+
+        const newsListNodes = useMemo(() => {
+          return h(
+            'ul',
+            { className: 'record-list' },
+            ACADEMIC_DATA.news.map((item) =>
+              h(
+                'li',
+                { key: item.id, className: 'record-row-wrapper' },
+                h(
+                  'div',
+                  { className: 'row-standard' },
+                  h('span', { className: 'cell-time' }, item.date),
+                  h(
+                    'div',
+                    { className: 'cell-body' },
+                    item.href
+                      ? h(
+                          'a',
+                          { href: item.href, target: '_blank', rel: 'noreferrer' },
+                          item[lang]
+                        )
+                      : h('p', null, item[lang])
+                  )
+                )
+              )
+            )
+          );
+        }, [lang]);
+
+        const publicationListNodes = useMemo(() => {
+          return h(
+            'ul',
+            { className: 'record-list' },
+            ACADEMIC_DATA.publications.map((pub) => {
+              const venueText = typeof pub.venue === 'string' ? pub.venue : pub.venue[lang];
+              return h(
+                'li',
+                { key: pub.id, className: 'record-row-wrapper' },
+                h(
+                  'div',
+                  { className: 'row-publication' },
+                  h('span', { className: 'cell-time' }, pub.year),
+                  h(
+                    'div',
+                    { className: 'cell-body' },
+                    h(
+                      'h3',
+                      { className: 'pub-title' },
+                      h(
+                        'a',
+                        { href: pub.url, target: '_blank', rel: 'noreferrer' },
+                        pub.title[lang]
+                      )
+                    ),
+                    h(
+                      'p',
+                      { className: 'pub-meta' },
+                      `${venueText} · `,
+                      h('strong', null, pub.role[lang])
+                    )
+                  ),
+                  h(
+                    'a',
+                    {
+                      className: 'pub-action',
+                      href: pub.actionUrl,
+                      target: '_blank',
+                      rel: 'noreferrer'
+                    },
+                    `[${pub.actionLabel}]`
+                  )
+                )
+              );
+            })
+          );
+        }, [lang]);
+
+        const researchListNodes = useMemo(() => {
+          return h(
+            'ul',
+            { className: 'record-list' },
+            ACADEMIC_DATA.research.map((item) =>
+              h(
+                'li',
+                { key: item.id, className: 'record-row-wrapper' },
+                h(
+                  'div',
+                  { className: 'row-labeled' },
+                  h('span', { className: 'cell-label' }, item.label[lang]),
+                  h('div', { className: 'cell-body' }, h('p', null, item.desc[lang]))
+                )
+              )
+            )
+          );
+        }, [lang]);
+
+        const projectListNodes = useMemo(() => {
+          return h(
+            'ul',
+            { className: 'record-list' },
+            ACADEMIC_DATA.projects.map((proj) =>
+              h(
+                'li',
+                { key: proj.id, className: 'record-row-wrapper' },
+                h(
+                  'div',
+                  { className: 'row-labeled' },
+                  h(
+                    'span',
+                    { className: 'cell-label' },
+                    proj.href
+                      ? h('a', { href: proj.href, target: '_blank', rel: 'noreferrer' }, proj.name)
+                      : proj.name
+                  ),
+                  h('div', { className: 'cell-body' }, h('p', null, proj.desc[lang]))
+                )
+              )
+            )
+          );
+        }, [lang]);
+
+        const awardListNodes = useMemo(() => {
+          return h(
+            'ul',
+            { className: 'record-list' },
+            ACADEMIC_DATA.awards.map((aw) =>
+              h(AwardRow, {
+                key: aw.id,
+                year: aw.year,
+                title: aw.title[lang],
+                badge: aw.badge ? aw.badge[lang] : undefined,
+                issuer: aw.issuer[lang],
+                highlight: aw.highlight
+              })
+            )
+          );
+        }, [lang]);
+
+        const experienceListNodes = useMemo(() => {
+          return h(
+            React.Fragment,
+            null,
+            h(
+              'ul',
+              { className: 'record-list' },
+              ACADEMIC_DATA.experience.map((exp) =>
+                h(
+                  'li',
+                  { key: exp.id, className: 'record-row-wrapper' },
+                  h(
+                    'div',
+                    { className: 'row-standard' },
+                    h('span', { className: 'cell-time' }, exp.period),
+                    h(
+                      'div',
+                      { className: 'cell-body' },
+                      h('strong', { className: 'award-title' }, exp.title[lang]),
+                      h('p', null, exp.detail[lang])
+                    )
+                  )
+                )
+              )
+            ),
+            h(
+              'div',
+              { className: 'credential-bar' },
+              ACADEMIC_DATA.credentials.map((cred) =>
+                h('span', { key: cred.id, className: 'credential-item' }, cred[lang])
+              )
+            )
+          );
+        }, [lang]);
+
+        const contactListNodes = useMemo(() => {
+          return h(
+            'ul',
+            { className: 'record-list' },
+            ACADEMIC_DATA.contacts.map((ct) =>
+              h(
+                'li',
+                { key: ct.id, className: 'record-row-wrapper' },
+                h(
+                  'div',
+                  { className: 'row-labeled' },
+                  h('span', { className: 'cell-label' }, ct.label),
+                  h(
+                    'div',
+                    { className: 'cell-body' },
+                    h(
+                      'a',
+                      {
+                        href: ct.href,
+                        target: ct.external ? '_blank' : undefined,
+                        rel: ct.external ? 'noreferrer' : undefined
+                      },
+                      ct.value
+                    )
+                  )
+                )
+              )
+            )
+          );
+        }, []);
+
+        const currentYear = useMemo(() => new Date().getFullYear(), []);
+
+        return h(
+          'div',
+          { className: 'page-shell' },
+          h(SiteHeader, {
+            lang: lang,
+            theme: theme,
+            activeSection: activeSection,
+            onToggleLang: handleToggleLang,
+            onToggleTheme: handleToggleTheme,
+            onSelectSection: handleSelectSection
+          }),
+          h(
+            'main',
+            { className: 'main-content' },
+            introContent,
+            h(
+              SectionFrame,
+              { id: 'news', indexLabel: '01', title: lang === 'zh' ? '学术动态' : 'Recent News' },
+              newsListNodes
+            ),
+            h(
+              SectionFrame,
+              { id: 'publications', indexLabel: '02', title: lang === 'zh' ? '代表性论文' : 'Selected Publications' },
+              publicationListNodes
+            ),
+            h(
+              SectionFrame,
+              { id: 'research', indexLabel: '03', title: lang === 'zh' ? '研究方向与技术栈' : 'Research & Stack' },
+              researchListNodes
+            ),
+            h(
+              SectionFrame,
+              { id: 'projects', indexLabel: '04', title: lang === 'zh' ? '科研平台与智能体项目' : 'Platforms & Agent Systems' },
+              projectListNodes
+            ),
+            h(
+              SectionFrame,
+              { id: 'awards', indexLabel: '05', title: lang === 'zh' ? '荣誉与奖学金' : 'Honors & Scholarships' },
+              awardListNodes
+            ),
+            h(
+              SectionFrame,
+              { id: 'experience', indexLabel: '06', title: lang === 'zh' ? '教育与实践经历' : 'Education & Experience' },
+              experienceListNodes
+            ),
+            h(
+              SectionFrame,
+              { id: 'contact', indexLabel: '07', title: lang === 'zh' ? '联系方式' : 'Contact' },
+              contactListNodes
+            )
+          ),
+          h(
+            'footer',
+            { className: 'site-footer' },
+            h(
+              'div',
+              { className: 'footer-flex' },
+              h('span', null, `© ${currentYear} Zhuang Zhiyao · Ocean University of China`),
+              h(
+                'a',
+                { className: 'back-top-link', href: '#top' },
+                lang === 'zh' ? '返回顶部 ↑' : 'Back to top ↑'
+              )
+            )
+          )
+        );
       }
-      function applyTheme(next) {
-        root.dataset.theme = next;
-        themeButton.textContent = next === 'dark' ? '○' : '◐';
-        themeButton.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-        localStorage.setItem('zzy-theme', next);
-      }
-      langButton.addEventListener('click', () => applyLanguage(lang === 'zh' ? 'en' : 'zh'));
-      themeButton.addEventListener('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
-      applyLanguage(lang);
-      applyTheme(localStorage.getItem('zzy-theme') || 'light');
-      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const rootContainer = document.getElementById('root');
+      const reactRoot = ReactDOM.createRoot(rootContainer);
+      reactRoot.render(h(AcademicPortfolioApp));
     })();
   </script>
 </body>
